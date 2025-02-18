@@ -8,7 +8,7 @@
  * 
  * Descripción: En este actividad se realizarán 15 ejercicios de uso básico en JavaScript
  * 
- * Fecha de entrega: 12/02/2025
+ * Fecha de entrega: 19/02/2025
  */
 
 // Imprime el inicio del programa
@@ -41,9 +41,9 @@ export function bubbleSort(ar) { // Ordena una lista de números, encontrando el
 
     let flag = false; // Bandera para saber si se hizo un intercambio
 
-    for (let i=0; i<ar.length-1; i++) { // Recorre la lista hasta el final
+    for (let i=0; i<ar.length; i++) { // Recorre la lista hasta el final
 
-        for (let j=0; j<ar.length-i-1; j++) { // Recorre la lista hasta uno menos en cada iteración
+        for (let j=0; j<ar.length-i; j++) { // Recorre la lista hasta uno menos en cada iteración
             if (ar[j] > ar[j+1]) { // Si el valor actual es mayor al siguiente se intercambian 
 
                 let temp = ar[j]; // Se guarda el valor actual
@@ -127,7 +127,9 @@ console.log("5. El máximo común divisor de", n1, "y", n2, "es:", mcd(n1, n2));
 
 export function hackerSpeak(str) {
     let result = ""; // Almacena el resultado final
+
     for (let i=0; i<str.length; i++) { // Recorre el string
+
         switch (str[i].toLowerCase()) { // Pasa la letra a minúscula y compara
             case "a": // a - 4
                 result += "4";
@@ -159,7 +161,9 @@ console.log("6. La cadena '", str, "' en 'Hacker Speak' es:", hackerSpeak("Javas
 
 export function factorize(n) {
     let result = []; // Lista final de factores
-    for (let i=1; i<=n; i++) { // Recorre los números hasta n
+
+    for (let i=1; i<=n; i++) { // Recorre los números del 1 hasta n
+
         if (n % i == 0) { // Si el residuo entre n e i es 0, i es un factor, ya que divide a n
             result.push(i); // Agrega el factor a la lista
         }
@@ -199,6 +203,7 @@ export function findShortestString(list) {
     let shortest = list[0].length; // Inicializa el texto más corto con la longitud de la primera palabra
 
     for (let i=1; i<list.length; i++) { // Recorre las cadenas de texto, comenzando por la segunda
+
         if (list[i].length < shortest) { // Si la longitud del texto actual es menor que el más corto
             shortest = list[i].length; // Ahora ese texto es el menor
         }
@@ -214,9 +219,10 @@ console.log("9. Longitud más corta en una lista de cadenas:", findShortestStrin
 export function isPalindrome(str) {
     str = str.toLowerCase(); // Convierte el texto a minúsculas
     let separated = str.split(' '); // Separa el texto por palabras
-    let joined = separated.join(''); // Une las palabras eliminando los espacios
+    let joined = separated.join(''); // Une las palabras y elimina los espacios
 
     for (let i=0; i<joined.length/2; i++) { // Recorre la mitad del texto
+
         if (joined[i] != joined[joined.length-i-1]) { // Si hay una diferencia entre las letras
             return false; // No es palíndromo
         }
@@ -258,6 +264,7 @@ export function stats(list) {
 
     if (list.length == 0) return [0,0]; // Si la lista está vacía, la mediana y moda son 0
 
+    // Estadísticas a calcular
     let median = 0; // Almacena la mediana de los números
     let mode = list[0]; // Moda, número que más se repite, se inicializa con el primer número
     let reps = 0; // Contador de repeticiones de la moda
@@ -281,8 +288,11 @@ export function stats(list) {
     // Calcular la mediana
     if (list.length % 2 == 0) { // Si la lista tiene una longitud par
         median = ( list[(list.length/2)-1] + list[(list.length/2)] ) / 2; // Obtiene el promedio de los 2 números a la mitad
+        // Se resta 1 al primer índice para obtener el primer índice correcto en la mitad. Ej: 4/2 = 2, pero el índice correcto es 1
+        // No se resta al segundo índice porque ya se obtiene el índice correcto
     }
     else median = list[Math.floor(list.length/2)]; // Se obtiene el número entero de la mitad de la lista
+    // Se redondea hacia abajo. Ej: 5/2 = 2.5, se redondea a 2, que es el índice correcto
 
     // Agregar la mediana y moda al resultado
     result.push(median);
@@ -306,7 +316,7 @@ export function popularString(list) {
     for (let i=0; i<list.length; i++) { // Recorre las cadenas de texto
         let in_reps = 0; // Contador de repeticiones para la cadena en la que se encuentra
 
-        for (let j=0; j<list.length; j++) {
+        for (let j=0; j<list.length; j++) { // Compara con las demás cadenas
             if (i != j && list[i] == list[j]) { // Mientras el texto vuelva a aparecer, aumenta sus repeticiones
                 in_reps++;
             }
@@ -325,11 +335,11 @@ console.log("13. Texto más frecuente en la lista de cadenas de texto:", popular
 // 14. Escribe una función llamada isPowerOf2 que tome un número y devuelva verdadero si es una potencia de dos, falso de lo contrario
 
 export function isPowerOf2(n) {
-    if (n==0) return false; // el 0 no es una potencia de 2
+    if (n == 0) return false; // el 0 no es una potencia de 2
 
     // Dividimos n entre 2 hasta que sea 1. Si en algún momento el residuo no es 0 o n no es 1, no es potencia de 2
-    while (n!=1) { // Mientras n sea diferente a 1
-        if (n%2 != 0) return false; // Si n no es divisible entre 2, no es potencia de 2
+    while (n != 1) { // Mientras n sea diferente a 1
+        if (n % 2 != 0) return false; // Si n no es divisible entre 2, no es potencia de 2
         n = n/2; // Se divide n entre 2
     }
 
@@ -342,14 +352,13 @@ console.log("14. El número", num, "es potencia de 2:", isPowerOf2(num));
 // 15. Escribe una función llamada sortDescending que tome una lista de números y devuelva una nueva lista con todos los números en orden descendente
 
 export function sortDescending(list) {
-    let result = [] // Almacena la lista ordenada en forma descendente
     
+    // Se utilizan las funciones programadas anteriormente para obtener el resultado
     let ordered_list = bubbleSort(list); // Ordena la lista en forma ascendente con Bubble Sort
+    let inverted_list = invertArray(ordered_list); // Invierte la lista ordenada en una nueva lista
 
-    for (let i=ordered_list.length-1; i>=0; i--) { // Recorre la lista ascendente al revés
-        result.push(ordered_list[i]); // Agrega los números al resultado
-    }
-    return result;
+    // Nota: invertArrayInplace no se puede utilizar porque modifica la lista original
+    return inverted_list;
 }
 
 list = [4,6,3,1,2];
