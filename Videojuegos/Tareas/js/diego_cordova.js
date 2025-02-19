@@ -211,7 +211,7 @@ export function findShortestString(list) {
     return shortest;
 }
 
-let list_strings = ["Hola","Yo","Amigo","A","Espectacular"];
+let list_strings = ["Hola","Yo","Amigo","A","Espectacular","aaa","aab"];
 console.log("9. Longitud más corta en una lista de cadenas:", findShortestString(list_strings));
 
 // 10. Escribe una función llamada isPalindrome que revise si una cadena de texto es un palíndromo o no.
@@ -236,12 +236,13 @@ console.log("10. Cadena '", str ,"' es un palíndromo:", isPalindrome(str));
 // 11. Escribe una función llamada sortStrings que tome una lista de cadena de textos y devuelva una nueva lista con todas las cadenas en orden alfabético.
 
 export function sortStrings(list) {
-    /*
+
     for (let i=0; i<list.length; i++) { // Recorre la lista
 
         for (let j=0; j<list.length; j++) { // Recorre la lista y compara con los demás
 
-            if (list[i].toLowerCase() < list[j].toLowerCase()) { // Convierte las cadenas a minúsculas y compara la primera letra
+            if (list[i].toLowerCase() < list[j].toLowerCase()) { // Convierte las cadenas a minúsculas y las compara alfabéticamente
+                // En este caso, comparar las cadenas en minúsculas por código ASCII es suficiente, ya que son contiguas
 
                 // Intercambia las palabras
                 let temp = list[i];
@@ -251,9 +252,6 @@ export function sortStrings(list) {
         }
     }
     return list;
-    */
-    let sorted = list.sort(); // Ordena la lista alfabéticamente
-    return sorted;
 }
 
 console.log("11. Lista de cadenas ordenadas alfabéticamente:", sortStrings(list_strings));
@@ -270,6 +268,7 @@ export function stats(list) {
     let reps = 0; // Contador de repeticiones de la moda
     let result = []; // Lista para mostrar los resultados
 
+    // Encontrar la moda
     for (let i=0; i<list.length-1; i++) { // Recorre la lista
         let in_reps = 0; // Contador de repeticiones para cada número en las iteraciones
         
@@ -286,6 +285,9 @@ export function stats(list) {
     }
 
     // Calcular la mediana
+
+    list = bubbleSort(list); // Ordena la lista en forma ascendente con Bubble Sort
+
     if (list.length % 2 == 0) { // Si la lista tiene una longitud par
         median = ( list[(list.length/2)-1] + list[(list.length/2)] ) / 2; // Obtiene el promedio de los 2 números a la mitad
         // Se resta 1 al primer índice para obtener el primer índice correcto en la mitad. Ej: 4/2 = 2, pero el índice correcto es 1
@@ -301,7 +303,7 @@ export function stats(list) {
     return result;
 }
 
-list = [4, 4, 6, 8, 4, 4, 6, 8, 6];
+list = [4, 4, 6, 8, 4, 4, 6, 8];
 console.log("12. Mediana y moda de la lista de números:", stats(list));
 
 // 13. Escribe una función llamada popularString que tome una lista de cadenas de texto y devuelva la cadena más frecuente
