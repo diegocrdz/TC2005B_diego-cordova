@@ -256,23 +256,24 @@ export function sortStrings(list) {
 
 console.log("11. Lista de cadenas ordenadas alfabéticamente:", sortStrings(list_strings));
 
-// 12. Escribe una función llamada stats que tome una lista de números y devuelva una lista con dos elementos: la mediana y la moda
+// 12. Escribe una función llamada stats que tome una lista de números y devuelva una lista con dos elementos: la media y la moda
 
 export function stats(list) {
 
     if (list.length == 0) return [0,0]; // Si la lista está vacía, la mediana y moda son 0
 
     // Estadísticas a calcular
-    let median = 0; // Almacena la mediana de los números
+    let sum = 0; // Almacena la suma de los números
     let mode = list[0]; // Moda, número que más se repite, se inicializa con el primer número
     let reps = 0; // Contador de repeticiones de la moda
     let result = []; // Lista para mostrar los resultados
 
     // Encontrar la moda
-    for (let i=0; i<list.length-1; i++) { // Recorre la lista
+    for (let i=0; i<list.length; i++) { // Recorre la lista
         let in_reps = 0; // Contador de repeticiones para cada número en las iteraciones
+        sum += list[i]; // Suma los números para calcular la media
         
-        for (let j=list.length-1; j>=0; j--) { // Recorre la lista al revés
+        for (let j=0; j<list.length; j++) { // Recorre la lista y compara con los demás números
 
             if (i != j && list[i] == list[j]) { // Mientras el número vuelva a aparecer, aumenta sus repeticiones
                 in_reps++;
@@ -284,20 +285,11 @@ export function stats(list) {
         }
     }
 
-    // Calcular la mediana
-
-    list = bubbleSort(list); // Ordena la lista en forma ascendente con Bubble Sort
-
-    if (list.length % 2 == 0) { // Si la lista tiene una longitud par
-        median = ( list[(list.length/2)-1] + list[(list.length/2)] ) / 2; // Obtiene el promedio de los 2 números a la mitad
-        // Se resta 1 al primer índice para obtener el primer índice correcto en la mitad. Ej: 4/2 = 2, pero el índice correcto es 1
-        // No se resta al segundo índice porque ya se obtiene el índice correcto
-    }
-    else median = list[Math.floor(list.length/2)]; // Se obtiene el número entero de la mitad de la lista
-    // Se redondea hacia abajo. Ej: 5/2 = 2.5, se redondea a 2, que es el índice correcto
+    // Calcular la media (promedio)
+    let mean = sum / list.length; // Suma de los números entre la cantidad de números
 
     // Agregar la mediana y moda al resultado
-    result.push(median);
+    result.push(mean);
     result.push(mode);
 
     return result;
