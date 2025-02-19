@@ -335,6 +335,7 @@ let list_rep_strings = ["one", "two", "thr", "fou"];
 console.log("13. Texto más frecuente en la lista de cadenas de texto:", popularString(list_rep_strings));
 
 // 14. Escribe una función llamada isPowerOf2 que tome un número y devuelva verdadero si es una potencia de dos, falso de lo contrario
+// Lógica de código obtenida de la siguiente fuente: https://www.geeksforgeeks.org/program-to-find-whether-a-given-number-is-power-of-2/
 
 export function isPowerOf2(n) {
     if (n == 0) return false; // el 0 no es una potencia de 2
