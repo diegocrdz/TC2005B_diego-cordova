@@ -1,136 +1,139 @@
 /*
- * Actividad en clase: Javascript
- * Construcción de software y toma de decisiones
+ * In-Class Activity: Javascript
  * TC2005B.401
  *
- * Alumno: Diego Córdova Rodriguez
- * Matrícula: A01781166
+ * Student: Diego Córdova Rodriguez
+ * ID: A01781166
  * 
- * Descripción: En este actividad se realizarán 15 ejercicios de uso básico en JavaScript
+ * Description: In this activity, 15 basic exercises in JavaScript will be performed
  * 
- * Fecha de entrega: 19/02/2025
+ * Due date: 19/02/2025
  */
 
-// Imprime el inicio del programa
-console.log("-----------------------------Actividad en clase: Javascript-----------------------------");
+// Prints the title of the activity
+console.log("-----------------------------In-Class Activity: Javascript-----------------------------");
 
-// 1. Escribe una función llamada firstNonRepeating que encuentre el primer carácter de un cadena de texto que no se repite. Prueba tu función con: 'abacddbec'
+// 1. firstNonRepeating: Finds the first non-repeating character in a string
 
 export function firstNonRepeating(str) {
-    for (let i=0; i<str.length; i++) { // Recorre el string de texto
-        let char = str[i]; // Guarda el carácter actual
+    for (let i=0; i<str.length; i++) { // For each character in the string
+        let char = str[i]; // Saves the character to compare with the others
 
-        for (let j=0; j<str.length; j++) { // Recorre el string y compara char con los demás caracteres
+        for (let j=0; j<str.length; j++) { // For each character in the string
 
-            if (i != j && char == str[j]) { // Si los indices comparados son diferentesy el carácter se repite, termina
+            if (i != j && char == str[j]) { // If the character is repeated, it's not the first non-repeating character
                 break;
             }
-            else if (j == str.length-1) { // Si se llega al final del string y no se repitió el carácter, se devuelve
+            else if (j == str.length-1) { // If the character is not repeated, it's the first non-repeating character
                 return char;
             }
         }
     }
-    return; // Si solo hay caracteres repetidos o no hay caracteres, no se devuelve nada
+    return; // If there's no non-repeating character, return undefined
 }
 
-console.log("1. El primer carácter no repetido de 'abacddbec' es: " + firstNonRepeating("abacddbec"));
+console.log("1. The first non-repeating character from 'abacddbec' is: " + firstNonRepeating("abacddbec"));
 
-// 2. Escribe una función llamada bubbleSort que implemente el algoritmo 'bubble-sort' para ordenar una lista de números.
+// 2. bubbleSort: Sorts a list of numbers by finding the largest in each iteration and placing it at the end
 
-export function bubbleSort(ar) { // Ordena una lista de números, encontrando el mayor en cada iteración y colocándolo al final
+export function bubbleSort(ar) {
 
-    let flag = false; // Bandera para saber si se hizo un intercambio
+    let flag = false; // Flag to indicate if there was a swap
 
-    for (let i=0; i<ar.length; i++) { // Recorre la lista hasta el final
+    for (let i=0; i<ar.length; i++) { // For each element in the list
 
-        for (let j=0; j<ar.length-i; j++) { // Recorre la lista hasta uno menos en cada iteración
-            if (ar[j] > ar[j+1]) { // Si el valor actual es mayor al siguiente se intercambian 
+        for (let j=0; j<ar.length-i; j++) { // For each element in the list
+            if (ar[j] > ar[j+1]) { // If the current element is greater than the next one
+                
+                // Swap the elements
+                let temp = ar[j];
+                ar[j] = ar[j+1];
+                ar[j+1] = temp;
 
-                let temp = ar[j]; // Se guarda el valor actual
-                ar[j] = ar[j+1]; // Se intercambia el valor actual por el siguiente
-                ar[j+1] = temp; // Se intercambia el siguiente por el valor actual
-
-                flag = true; // Indica que se hizo un intercambio
+                flag = true; // Indicates that there was a swap
             }
         }
 
-        if (flag == false) break; // Si no se hizo intercambio, la lista está ordenada
+        if (flag == false) break; // If there was no swap, the list is already sorted
     }
     return ar;
 }
 
 let list = [4,6,3,1,2];
-console.log("2. Lista ordenada con Bubble Sort:", bubbleSort(list));
+console.log("2. List ordered with Bubble Sort:", bubbleSort(list));
 
-// 3. Escribe dos funciones: la primera con nombre invertArray que invierta un arreglo de números y regrese un nuevo arreglo con el resultado; la segunda, con nombre invertArrayInplace,que modifique el mismo arreglo que se pasa como argumento. No se permite usar la función integrada 'reverse'.
+// 3.1. invertArray: Inverts an array in a new array
 
 export function invertArray(ar) {
-    let ar2 = []; // Nuevo arreglo para guardar los valores invertidos
-    for (let i=ar.length-1; i>=0; i--) { // Recorre el arreglo al revés
-        ar2.push(ar[i]); // Agrega cada valor al nuevo arreglo
+    let ar2 = []; // New array to store the inverted values
+
+    for (let i=ar.length-1; i>=0; i--) { // For each element in the array, starting from the end
+        ar2.push(ar[i]); // Add the element to the new array
     }
-    return ar2; // Regresa el nuevo arreglo
+    return ar2;
 }
 
-console.log("3.1. Arreglo invertido en un nuevo resultado:", invertArray([1,2,3,4,5]));
+console.log("3.1. Array inverted in a new one:", invertArray([1,2,3,4,5]));
+
+// 3.2. invertArrayInplace: Inverts an array in itself
 
 export function invertArrayInplace(ar) { 
-    for (let i=0; i<ar.length; i++) { // Recorre el arreglo
+    for (let i=0; i<ar.length; i++) { // For each element in the array
 
-        if (i >= ar.length-i-1) { // Si el índice es mayor o igual a la mitad del arreglo, terminar
+        if (i >= ar.length-i-1) { // If the index is greater or equal to the half of the array, it's already inverted
             break;
         }
         
-        // Intercambia el valor con el del indice opuesto
+        // Swap the elements at the beginning and end of the array
         let temp = ar[i];
         ar[i] = ar[ar.length-i-1];
         ar[ar.length-i-1] = temp;
     }
     return ar;
 }
+console.log("3.2. Array inverted in itself:", invertArrayInplace([1,2,3,4,5]));
 
-console.log("3.2. Arreglo invertido en él mismo:", invertArrayInplace([1,2,3,4,5]));
-
-// 4. Escribe una función llamada capitalize que reciba una cadena de texto y regrese una nueva con la primer letra de cada palabra en mayúscula.
+// 4. capitalize: Capitalizes the first letter of each word in a string and returns the new string
 
 export function capitalize(str) {
-    if (str == "") return str; // Si la cadena está vacía, no se hace nada
+    if (str == "") return str; // If the string is empty, return ""
 
-    let words = str.split(' '); // Separa las palabras por espacio
-    for (let i=0; i<words.length; i++) { // Recorre las palabras
-        words[i] = words[i][0].toUpperCase() + words[i].substring(1); // La primer letra de cada palabra se pasa a mayúsculas
+    let words = str.split(' '); // Splits the string into words
+
+    for (let i=0; i<words.length; i++) { // For each word in the string
+        words[i] = words[i][0].toUpperCase() + words[i].substring(1); // Capitalizes the first letter of the words
     }
-    return words.join(' '); // Une las palabras de nuevo en un string
+    return words.join(' '); // Joins the words into a string and returns it
 }
 
-let str = "hola mundo hola";
-console.log("4. La cadena '", str, "' con las primeras letras en mayúscula es:", capitalize(str));
+let str = "hello world";
+console.log("4. The string '", str, "' with its first letters capitalized:", capitalize(str));
 
-// 5. Escribe una función llamada mcd que calcule el máximo común divisor de dos números.
-// Lógica de código obtenida de la siguiente fuente: https://stackoverflow.com/questions/17445231/js-how-to-find-the-greatest-common-divisor
+// 5. mcd: Finds the greatest common divisor of two numbers
+// Code logic obtained from: https://stackoverflow.com/questions/17445231/js-how-to-find-the-greatest-common-divisor
 
 export function mcd(a, b) {
-    if (b == 0) { // Si b es 0, el unico divisor común es a
+    if (b == 0) { // If b is 0, the only common divisor is a
         return a;
     }
-    else if (a == 0) { // Si a es 0, el unico divisor común es b
+    else if (a == 0) { // If a is 0, the only common divisor is b
         return b;
     }
-    return mcd(b, a % b); // Si a o b no es 0, se llama a la función con b y el residuo de a entre b
+    return mcd(b, a % b); // Recursive call to find the greatest common divisor
 }
 
 let n1 = 12;
 let n2 = 18;
-console.log("5. El máximo común divisor de", n1, "y", n2, "es:", mcd(n1, n2));
+console.log("5. The geatest common divisor of", n1, "and", n2, ":", mcd(n1, n2));
 
-// 6. Crea una función llamada hackerSpeak que cambie una cadena de texto a 'Hacker Speak'. Por ejemplo, para la cadena 'Javascript es divertido', su hacker speak es: 'J4v45c1pt 35 d1v3rt1d0'.
+// 6. hackerSpeak: Translates a string to 'Hacker Speak' by replacing some letters with numbers
 
 export function hackerSpeak(str) {
-    let result = ""; // Almacena el resultado final
+    let result = ""; // String to store the translated text
 
-    for (let i=0; i<str.length; i++) { // Recorre el string
+    for (let i=0; i<str.length; i++) { // For each character in the string
 
-        switch (str[i].toLowerCase()) { // Pasa la letra a minúscula y compara
+        switch (str[i].toLowerCase()) { // Switch each character to lowercase to compare with the cases
             case "a": // a - 4
                 result += "4";
                 break;
@@ -147,7 +150,7 @@ export function hackerSpeak(str) {
                 result += "0";
                 break;
             default:
-                result += str[i];
+                result += str[i]; // If is not in the cases, keep the character
                 break;
         }
     }
@@ -155,37 +158,37 @@ export function hackerSpeak(str) {
 }
 
 str = "Javascript es divertido";
-console.log("6. La cadena '", str, "' en 'Hacker Speak' es:", hackerSpeak("Javascript es divertido"));
+console.log("6. The string '", str, "' in 'Hacker Speak':", hackerSpeak("Javascript es divertido"));
 
-// 7. Escribe una función llamada factorize que reciba un número, y regrese una lista con todos sus factores.
+// 7. factorize: Finds the factors of a number and returns them in a list
 
 export function factorize(n) {
-    let result = []; // Lista final de factores
+    let result = []; // List to store the factors
 
-    for (let i=1; i<=n; i++) { // Recorre los números del 1 hasta n
+    for (let i=1; i<=n; i++) { // For each number from 1 to n
 
-        if (n % i == 0) { // Si el residuo entre n e i es 0, i es un factor, ya que divide a n
-            result.push(i); // Agrega el factor a la lista
+        if (n % i == 0) { // If the number is divisible by i
+            result.push(i); // Add the factor to the list
         }
     }
     return result;
 }
 
 let num = 12;
-console.log("7. Los factores de", num, "son:", factorize(num));
+console.log("7. The factors of", num, "are:", factorize(num));
 
-// 8. Escribe una función llamada deduplicate que quite los elementos duplicados de un arreglo y regrese una lista con los elementos que quedan.
+// 8. deduplicate: Removes duplicate elements from a list and returns the new list
 
 export function deduplicate(ar) {
 
-    for (let i=0; i<ar.length; i++) { // Recorre el arreglo
-        let item = ar[i]; // Guarda un elemento
+    for (let i=0; i<ar.length; i++) { // For each element in the list
+        let item = ar[i]; // Saves the current element to compare with the others
 
-        for (let j=0; j<ar.length; j++) { // Recorre el arreglo y compara con todos los elementos menos el actual
+        for (let j=0; j<ar.length; j++) { // For each element in the list
 
-            if (i != j && item == ar[j]) { // Si se repite, lo elimina
-                ar.splice(j,1); // Del índice j, elimina 1 elemento
-                j--; // Disminuye j para no saltarse ningún elemento
+            if (i != j && item == ar[j]) { // If the element is repeated, delete it
+                ar.splice(j,1); // From the current position, delete one element
+                j--; // Decrease the index to avoid skipping elements
             }
         }
     }
@@ -193,58 +196,58 @@ export function deduplicate(ar) {
 }
 
 list = [1,2,3,4,3,2,1];
-console.log("8. Lista sin elementos duplicados:", deduplicate(list));
+console.log("8. List without duplicated elements:", deduplicate(list));
 
-// 9. Escribe una función llamada findShortestString que reciba como parámetro una lista de cadenas de texto, y regrese la longitud de la cadena más corta.
+// 9. findShortestString: Finds the shortest string in a list of strings
 
 export function findShortestString(list) {
-    if (list.length == 0) return 0; // Si la lista está vacía, la longitud es 0
+    if (list.length == 0) return 0; // If the list is empty, the shortest string is 0
 
-    let shortest = list[0].length; // Inicializa el texto más corto con la longitud de la primera palabra
+    let shortest = list[0].length; // Initializes the shortest string with the first one
 
-    for (let i=1; i<list.length; i++) { // Recorre las cadenas de texto, comenzando por la segunda
+    for (let i=1; i<list.length; i++) { // For each string in the list, starting from the second one to avoid comparing with itself
 
-        if (list[i].length < shortest) { // Si la longitud del texto actual es menor que el más corto
-            shortest = list[i].length; // Ahora ese texto es el menor
+        if (list[i].length < shortest) { // If the current text is shorter than the shortest
+            shortest = list[i].length; // The current text is the shortest
         }
     }
     return shortest;
 }
 
-let list_strings = ["Hola","Yo","Amigo","A","Espectacular","aaa","aab"];
-console.log("9. Longitud más corta en una lista de cadenas:", findShortestString(list_strings));
+let list_strings = ["one", "two", "three", "four", "five", "si"];
+console.log("9. The shortest length in a list of strings:", findShortestString(list_strings));
 
-// 10. Escribe una función llamada isPalindrome que revise si una cadena de texto es un palíndromo o no.
+// 10. isPalindrome: Checks if a string is a palindrome
 
 export function isPalindrome(str) {
-    str = str.toLowerCase(); // Convierte el texto a minúsculas
-    let separated = str.split(' '); // Separa el texto por palabras
-    let joined = separated.join(''); // Une las palabras y elimina los espacios
+    str = str.toLowerCase(); // Convert the text to lowercase
+    let separated = str.split(' '); // Separate the text by words
+    let joined = separated.join(''); // Join the words without spaces
 
-    for (let i=0; i<joined.length/2; i++) { // Recorre la mitad del texto
+    for (let i=0; i<joined.length/2; i++) { // For each character in the first half of the text
 
-        if (joined[i] != joined[joined.length-i-1]) { // Si hay una diferencia entre las letras
-            return false; // No es palíndromo
+        if (joined[i] != joined[joined.length-i-1]) { // If the character is different from the one in the other side
+            return false; // The text is not a palindrome
         }
     }
     return true;
 }
 
-str = "Anita lava la tina";
-console.log("10. Cadena '", str ,"' es un palíndromo:", isPalindrome(str));
+str = "rizuzir";
+console.log("10. The string '", str ,"' is a palindrome:", isPalindrome(str));
 
-// 11. Escribe una función llamada sortStrings que tome una lista de cadena de textos y devuelva una nueva lista con todas las cadenas en orden alfabético.
+// 11. sortStrings: Sorts a list of strings alphabetically
 
 export function sortStrings(list) {
 
-    for (let i=0; i<list.length; i++) { // Recorre la lista
+    for (let i=0; i<list.length; i++) { // For each string in the list
 
-        for (let j=0; j<list.length; j++) { // Recorre la lista y compara con los demás
+        for (let j=0; j<list.length; j++) { // For each string in the list
 
-            if (list[i].toLowerCase() < list[j].toLowerCase()) { // Convierte las cadenas a minúsculas y las compara alfabéticamente
-                // En este caso, comparar las cadenas en minúsculas por código ASCII es suficiente, ya que son contiguas
+            if (list[i].toLowerCase() < list[j].toLowerCase()) { // If the current string is less than the next one
+                // In this case, comparing the strings in lowercase by ASCII code is enough, since they are contiguous
 
-                // Intercambia las palabras
+                // Swap the strings
                 let temp = list[i];
                 list[i] = list[j];
                 list[j] = temp;
@@ -254,41 +257,41 @@ export function sortStrings(list) {
     return list;
 }
 
-console.log("11. Lista de cadenas ordenadas alfabéticamente:", sortStrings(list_strings));
+console.log("11. List of strings ordered alphabetically:", sortStrings(list_strings));
 
-// 12. Escribe una función llamada stats que tome una lista de números y devuelva una lista con dos elementos: la media y la moda
+// 12. stats: Calculates the mean and mode of a list of numbers
 
 export function stats(list) {
 
-    if (list.length == 0) return [0,0]; // Si la lista está vacía, la mediana y moda son 0
+    if (list.length == 0) return [0,0]; // If the list is empty, the mean and mode are 0
 
-    // Estadísticas a calcular
-    let sum = 0; // Almacena la suma de los números
-    let mode = list[0]; // Moda, número que más se repite, se inicializa con el primer número
-    let reps = 0; // Contador de repeticiones de la moda
-    let result = []; // Lista para mostrar los resultados
+    // Stats to calculate
+    let sum = 0; // Sum of the numbers
+    let mode = list[0]; // mode: most frequent number, initialized with the first number
+    let reps = 0; // Number of repetitions of the mode
+    let result = []; // List to store the mean and mode
 
-    // Encontrar la moda
-    for (let i=0; i<list.length; i++) { // Recorre la lista
-        let in_reps = 0; // Contador de repeticiones para cada número en las iteraciones
-        sum += list[i]; // Suma los números para calcular la media
+    // Calculate the mode
+    for (let i=0; i<list.length; i++) { // For each number in the list
+        let in_reps = 0; // Repetitions of each number
+        sum += list[i]; // Sum the numbers
         
-        for (let j=0; j<list.length; j++) { // Recorre la lista y compara con los demás números
+        for (let j=0; j<list.length; j++) { // For each number in the list
 
-            if (i != j && list[i] == list[j]) { // Mientras el número vuelva a aparecer, aumenta sus repeticiones
+            if (i != j && list[i] == list[j]) { // If the number is repeated, increase its repetitions
                 in_reps++;
             }
-            if (in_reps > reps) { // Si las repeticiones del número son mayores a las de la moda, el número es la nueva moda
+            if (in_reps > reps) { // If the repetitions are greater than the mode, the number is the new mode
                 mode = list[i];
                 reps = in_reps;
             }
         }
     }
 
-    // Calcular la media (promedio)
-    let mean = sum / list.length; // Suma de los números entre la cantidad de números
+    // Calculate the mean (average)
+    let mean = sum / list.length; // Sum of the numbers divided by the number of elements
 
-    // Agregar la mediana y moda al resultado
+    // Add the mean and mode to the result list
     result.push(mean);
     result.push(mode);
 
@@ -296,25 +299,25 @@ export function stats(list) {
 }
 
 list = [4, 4, 6, 8, 4, 4, 6, 8];
-console.log("12. Mediana y moda de la lista de números:", stats(list));
+console.log("12. Mean and mode of a list of numbers:", stats(list));
 
 // 13. Escribe una función llamada popularString que tome una lista de cadenas de texto y devuelva la cadena más frecuente
 
 export function popularString(list) {
 
-    if (list.length == 0) return ""; // Si la lista está vacía, no hay texto más popular
+    if (list.length == 0) return ""; // If the list is empty, the most popular string is ""
 
-    let popular = list[0]; // Inicializa el texto más popular con la primera cadena
-    let reps = 0; // Contador de repeticiones del texto más popular
+    let popular = list[0]; // Initialize the most popular string with the first one
+    let reps = 0; // Number of repetitions of the most popular string
 
-    for (let i=0; i<list.length; i++) { // Recorre las cadenas de texto
-        let in_reps = 0; // Contador de repeticiones para la cadena en la que se encuentra
+    for (let i=0; i<list.length; i++) { // For each string in the list
+        let in_reps = 0; // Repetitions of each string
 
-        for (let j=0; j<list.length; j++) { // Compara con las demás cadenas
-            if (i != j && list[i] == list[j]) { // Mientras el texto vuelva a aparecer, aumenta sus repeticiones
+        for (let j=0; j<list.length; j++) { // For each string in the list
+            if (i != j && list[i] == list[j]) { // If the string is repeated, increase its repetitions
                 in_reps++;
             }
-            if (in_reps > reps) { // Si las repeticiones del texto son mayores al más popular, el texto es más popular
+            if (in_reps > reps) { // If the repetitions are greater than the mode, the string is the new mode
                 popular = list[i];
                 reps = in_reps;
             }
@@ -324,37 +327,37 @@ export function popularString(list) {
 }
 
 let list_rep_strings = ["one", "two", "thr", "fou"];
-console.log("13. Texto más frecuente en la lista de cadenas de texto:", popularString(list_rep_strings));
+console.log("13. Most popular string in a list of strings:", popularString(list_rep_strings));
 
-// 14. Escribe una función llamada isPowerOf2 que tome un número y devuelva verdadero si es una potencia de dos, falso de lo contrario
-// Lógica de código obtenida de la siguiente fuente: https://www.geeksforgeeks.org/program-to-find-whether-a-given-number-is-power-of-2/
+// 14. isPowerOf2: Checks if a number is a power of 2. Returns true if it is, false if it's not
+// Code logic obtained from: https://www.geeksforgeeks.org/program-to-find-whether-a-given-number-is-power-of-2/
 
 export function isPowerOf2(n) {
-    if (n == 0) return false; // el 0 no es una potencia de 2
+    if (n == 0) return false; // If n is 0, it's not a power of 2
 
-    // Dividimos n entre 2 hasta que sea 1. Si en algún momento el residuo no es 0 o n no es 1, no es potencia de 2
-    while (n != 1) { // Mientras n sea diferente a 1
-        if (n % 2 != 0) return false; // Si n no es divisible entre 2, no es potencia de 2
-        n = n/2; // Se divide n entre 2
+    // Divide n by 2 until it reaches 1
+    while (n != 1) { // While n is different from 1
+        if (n % 2 != 0) return false; // If n is not divisible by 2, it's not a power of 2
+        n = n/2; // Divide n by 2
     }
 
-    return true; // Si n llega a 1, es potencia de 2
+    return true; // If n reaches 1, it's a power of 2
 }
 
 num = 16;
-console.log("14. El número", num, "es potencia de 2:", isPowerOf2(num));
+console.log("14. Number", num, "is a power of 2:", isPowerOf2(num));
 
-// 15. Escribe una función llamada sortDescending que tome una lista de números y devuelva una nueva lista con todos los números en orden descendente
+// 15. sortDescending: Sorts a list of numbers in descending order and returns it in a new list
 
 export function sortDescending(list) {
     
-    // Se utilizan las funciones programadas anteriormente para obtener el resultado
-    let ordered_list = bubbleSort(list); // Ordena la lista en forma ascendente con Bubble Sort
-    let inverted_list = invertArray(ordered_list); // Invierte la lista ordenada en una nueva lista
+    // We can use the functions created previously to sort and order the list in descending order
+    let ordered_list = bubbleSort(list); // Orders the list with Bubble Sort
+    let inverted_list = invertArray(ordered_list); // Inverts the ordered list
 
-    // Nota: invertArrayInplace no se puede utilizar porque modifica la lista original
+    // Note: invertArrayInplace can't be used because it modifies the original list
     return inverted_list;
 }
 
 list = [4,6,3,1,2];
-console.log("15. Lista de números ordenada en forma descendente:", sortDescending(list));
+console.log("15. List of numbers ordered in descending order in a new list:", sortDescending(list));
