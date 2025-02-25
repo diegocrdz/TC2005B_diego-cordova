@@ -7,26 +7,26 @@
     <title>HTML Blog</title>
 </head>
 <body>
+    <!-- Header -->
     <header>
         <h1>Blog de Diego Córdova Rodríguez</h1>
         <nav>
             <ul>
-                <li><a href="blog.html">Inicio</a></li>
-                <li><a href="git.html">Git/GitHub</a></li>
+                <li><a href="inicio.html">Inicio</a></li>
+                <li><a href="git_github.html">Git/GitHub</a></li>
                 <li><a href="terminal.html">Terminal</a></li>
             </ul>
         </nav>
     </header>
 
+    <!-- Título -->
     <h1>Flujo de trabajo de Git/GitHub</h1>
     <p>
         Mientras que Git es un sistema de control de versiones, GitHub es un sitio web
         en el cual se pueden crear repositorios. A través de estos repositorios se puede
         colaborar y trabajar en equipo, tener diferentes versiones de un mismo proyecto, 
-        entre otros.
-    </p>
-    <p>
-        El flujo de trabajo de Git/GitHub puede ser representado de la siguiente forma:
+        entre otros. El flujo de trabajo de Git/GitHub puede ser representado de la 
+        siguiente forma:
     </p>
     <ol>
         <li>Clonar un repositorio de GitHub.</li>
@@ -35,11 +35,14 @@
         <li>Subir los cambios al repositorio remoto con Git.</li>
     </ol>
     <p>
-        De esta manera, se puede trabajar de forma colaborativa con diferentes versiones de un mismo proyecto.
+        De esta manera, se puede trabajar de forma colaborativa con diferentes versiones 
+        de un mismo proyecto.
     </p>
+    <hr>
 
+    <!-- Sección de git -->
     <section id="git">
-        <h1>Git</h1>
+        <h2>Git</h2>
         <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSdd25hyNQOMs4Xx1Cv_A_oaT0zagfSWlXMBA&s" alt="git-logo">
         <p>
             Git es un sistema de control de versiones. A través de esto, un clon local 
@@ -52,8 +55,9 @@
             <li><a href="https://learn.microsoft.com/es-es/devops/develop/git/what-is-git", target="_blank">¿Qué es Git?</a></li>
         </ul>
         
-        <h2>Comandos básicos de Git</h2>
+        <h3>Comandos básicos de Git</h3>
 
+        <!-- Tabla de los comandos de git -->
         <table>
             <tr>
                 <th>Comando</th>
@@ -120,31 +124,31 @@
                 <td>Descarga los cambios del repositorio remoto al local.</td>
             </tr>
         </table>
+        <hr>
     </section>
 
+    <!-- Sección de github -->
     <section id="github">
-        <h1>GitHub</h1>
+        <h2>GitHub</h2>
         <img src="https://miro.medium.com/v2/resize:fit:1125/1*dDNpLKu_oTLzStsDTnkJ-g.png" alt="github-logo">
         <p>
             GitHub es un sitio web mediante el cual se pueden crear repositorios; 
             es decir, un lugar en el que puedes almacenar archivos y su respectivo 
             historial de revisión.
-        </p>
-        <p>
+            <br><br>
             A través de los repositorios se puede trabajar en equipo, colaborar, 
-            trabajar en distintas revisiones o versiones de un mismo archivo, etc. 
+            trabajar en distintas revisiones o versiones de un mismo archivo, etc.
             Finalmente, se puede subir, descargar o clonar el repositorio (mediante 
-            comandos en Git o integraciones de Visual Studio Code).
-        </p>
-        <p>
-            Para clonar un repositorio de GitHub, se debe copiar la URL del repositorio
-            y ejecutar el comando <code>git clone &lt;url&gt;</code> en la terminal.
+            comandos en Git o integraciones de Visual Studio Code). Para clonar un 
+            repositorio de GitHub, se debe copiar la URL del repositorio y ejecutar 
+            el siguiente comando en la terminal: <code>git clone &lt;url&gt;</code>
         </p>
         <ul>
             <li><a href="https://docs.github.com/en/repositories/creating-and-managing-repositories/about-repositories", target="_blank">¿Qué son los repositorios?</a></li>
         </ul>
     </section>
 
+    <!-- Final de la página -->
     <footer>
         <p>Diego Córdova Rodríguez</p>
         <a href="">Regresar al Inicio</a>
