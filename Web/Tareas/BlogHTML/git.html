@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <title>HTML Blog</title>
+</head>
+<body>
+    <header>
+        <h1>Blog de Diego Córdova Rodríguez</h1>
+        <nav>
+            <ul>
+                <li><a href="blog.html">Inicio</a></li>
+                <li><a href="git.html">Git/GitHub</a></li>
+                <li><a href="terminal.html">Terminal</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <h1>Flujo de trabajo de Git/GitHub</h1>
+    <p>
+        Mientras que Git es un sistema de control de versiones, GitHub es un sitio web
+        en el cual se pueden crear repositorios. A través de estos repositorios se puede
+        colaborar y trabajar en equipo, tener diferentes versiones de un mismo proyecto, 
+        entre otros.
+    </p>
+    <p>
+        El flujo de trabajo de Git/GitHub puede ser representado de la siguiente forma:
+    </p>
+    <ol>
+        <li>Clonar un repositorio de GitHub.</li>
+        <li>Realizar cambios en los archivos.</li>
+        <li>Subir los cambios al repositorio local con Git.</li>
+        <li>Subir los cambios al repositorio remoto con Git.</li>
+    </ol>
+    <p>
+        De esta manera, se puede trabajar de forma colaborativa con diferentes versiones de un mismo proyecto.
+    </p>
+
+    <section id="git">
+        <h1>Git</h1>
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSdd25hyNQOMs4Xx1Cv_A_oaT0zagfSWlXMBA&s" alt="git-logo">
+        <p>
+            Git es un sistema de control de versiones. A través de esto, un clon local 
+            es un repositorio de control de versiones del proyecto subido a la nube de 
+            forma remota. Se puede utilizar para coolaborar o tener diferentes versiones 
+            de un mismo proyecto.
+        </p>
+        <ul>
+            <li><a href="https://git-scm.com/downloads", target="_blank">Descargar Git</a></li>
+            <li><a href="https://learn.microsoft.com/es-es/devops/develop/git/what-is-git", target="_blank">¿Qué es Git?</a></li>
+        </ul>
+        
+        <h2>Comandos básicos de Git</h2>
+
+        <table>
+            <tr>
+                <th>Comando</th>
+                <th>Descripción</th>
+            </tr>
+            <tr>
+                <td>git clone &lt;url&gt;</td>
+                <td>Crea un clon local del repositorio remoto.</td>
+            </tr>
+            <tr>
+                <td>git add &lt;archivo&gt;</td>
+                <td>Añade archivos al área de preparación.</td>
+            </tr>
+            <tr>
+                <td>git commit -m &lt;comentario&gt;</td>
+                <td>Comenta los cambios realizados. Se suben los cambios al repositorio local.</td>
+            </tr>
+            <tr>
+                <td>git push -u origin &lt;rama&gt;</td>
+                <td>Sube todos los cambios ya comentados a la rama main del repositorio en Github.</td>
+            </tr>
+            <tr>
+                <td>git pull</td>
+                <td>Descarga los cambios del repositorio remoto al local.</td>
+            </tr>
+            <tr>
+                <td>git status</td>
+                <td>Muestra el estado de los archivos en el repositorio.</td>
+            </tr>
+            <tr>
+                <td>git log</td>
+                <td>Muestra el historial de commits.</td>
+            </tr>
+            <tr>
+                <td>git checkout -b &lt;rama&gt;</td>
+                <td>Crea una nueva rama y se cambia a ella.</td>
+            </tr>
+            <tr>
+                <td>git branch -a</td>
+                <td>Muestra las ramas existentes.</td>
+            </tr>
+            <tr>
+                <td>git branch -d &lt;rama&gt;</td>
+                <td>Elimina la rama indicada.</td>
+            </tr>
+            <tr>
+                <td>git branch -D &lt;rama&gt;</td>
+                <td>Forzar el borrado de la rama indicada.</td>
+            </tr>
+            <tr>
+                <td>git merge &lt;rama&gt;</td>
+                <td>Combina los cambios de una rama con la rama actual.</td>
+            </tr>
+            <tr>
+                <td>git switch &lt;rama&gt;</td>
+                <td>Cambia a la rama indicada.</td>
+            </tr>
+            <tr>
+                <td>git restore &lt;archivo&gt;</td>
+                <td>Descarta los cambios realizados en un archivo.</td>
+            </tr>
+            <tr>
+                <td>git fetch -a</td>
+                <td>Descarga los cambios del repositorio remoto al local.</td>
+            </tr>
+        </table>
+    </section>
+
+    <section id="github">
+        <h1>GitHub</h1>
+        <img src="https://miro.medium.com/v2/resize:fit:1125/1*dDNpLKu_oTLzStsDTnkJ-g.png" alt="github-logo">
+        <p>
+            GitHub es un sitio web mediante el cual se pueden crear repositorios; 
+            es decir, un lugar en el que puedes almacenar archivos y su respectivo 
+            historial de revisión.
+        </p>
+        <p>
+            A través de los repositorios se puede trabajar en equipo, colaborar, 
+            trabajar en distintas revisiones o versiones de un mismo archivo, etc. 
+            Finalmente, se puede subir, descargar o clonar el repositorio (mediante 
+            comandos en Git o integraciones de Visual Studio Code).
+        </p>
+        <p>
+            Para clonar un repositorio de GitHub, se debe copiar la URL del repositorio
+            y ejecutar el comando <code>git clone &lt;url&gt;</code> en la terminal.
+        </p>
+        <ul>
+            <li><a href="https://docs.github.com/en/repositories/creating-and-managing-repositories/about-repositories", target="_blank">¿Qué son los repositorios?</a></li>
+        </ul>
+    </section>
+
+    <footer>
+        <p>Diego Córdova Rodríguez</p>
+        <a href="">Regresar al Inicio</a>
+    </footer>
+
+</body>
+</html>
