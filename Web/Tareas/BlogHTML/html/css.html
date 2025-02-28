@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../css/blog_css.css">
+    <title>HTML Blog</title>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <h1>Blog de Diego Córdova Rodríguez</h1>
+        <nav>
+            <ul>
+                <li><a href="inicio.html">Inicio</a></li>
+                <li><a href="git_github.html">Git/GitHub</a></li>
+                <li><a href="terminal.html">Terminal</a></li>
+                <li><a href="css.html">CSS</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Título -->
+    <section class="titulo", id="titulo-css">
+        <h1>CSS</h1>
+    </section>
+
+    <hr>
+
+    <!-- Sección de qué es CSS -->
+    <section id="que-es-css">
+        <h2>¿Qué es CSS?</h2>
+        <p>
+            CSS (Cascading Style Sheets) es un lenguaje de diseño utilizado para
+            dar cualidades estéticas a una página web. El código CSS se puede ligar
+            a documentos con código HTML (utilizado para crear el contenido y estructura
+            de una web) para darle estilo a la página con colores, fuentes, márgenes,
+            rellenos, etc.
+            <br><br>
+            CSS es denomminado como estilos en cascada debido a que el código se lee
+            y aplica de arriba hacia abajo.
+        </p>
+        <img src="../images/css_basics.png" alt="">
+        <ul>
+            <li><a href="#como-se-utiliza-css">¿Cómo se utiliza CSS?</a></li>
+            <li><a href="#como-ligar-css-html">¿Cómo ligar un CSS a un HTML?</a></li>
+            <li><a href="#selectores">Selectores</a></li>
+            <li><a href="#propiedades">Propiedades</a></li>
+            <li><a href="#valores">Valores</a></li>
+            <li><a href="#referencias">Referencias</a></li>
+        </ul>
+    </section>
+
+    <hr>
+
+    <!-- Sección de cómo se utiliza CSS -->
+    <section id="como-se-utiliza-css">
+        <h2>¿Cómo se utiliza CSS?</h2>
+        <p>
+            CSS se utiliza bajo el conepto de separar la estructura y presentación 
+            de una página web, haciendo que el código sea más fácil de modificar y mantener
+            a largo plazo. La idea es mantener la siguiente estructura:
+        </p>
+        <ul>
+            <li>Archivos HTML: Estructura y contenido de la página web.</li>
+            <li>Archivo CSS: Diseño de la página web (colores, fuentes, márgenes. etc.).</li>
+        </ul>
+        <p>
+            Idealmente, se busca utilizar un único archivo CSS para cada página web, modificando
+            los aspectos visuales de toda la página en un solo lugar.
+        </p>
+    </section>
+
+    <!-- Sección de cómo ligar un CSS a un HTML -->
+    <section id="como-ligar-css-html">
+        <h2>¿Cómo ligar un CSS a un HTML?</h2>
+        <p>
+            Para ligar un archivo CSS a un archivo HTML, se utiliza la etiqueta <code>&lt;link&gt;</code>
+            en la sección <code>&lt;head&gt;</code> del archivo HTML. Se agrega el atributo <code>href</code>
+            para indicar la ruta del archivo CSS.
+        </p>
+        <pre><code>&lt;link rel="stylesheet" href="archivo.css"&gt;</code></pre>
+    </section>
+
+    <!-- Sección de selectores -->
+    <section id="selectores">
+        <h2>Selectores</h2>
+        <p>
+            Los selectores son la primera parte de una regla CSS. Son la forma 
+            en la que se indica a qué elementos de la página HTML se les
+            aplicará un estilo.
+            <br><br>
+            Los selectores tienen un orden de precedencia; es decir, el orden
+            en el que se aplican los estilos a los elementos de la página:
+            <ol>
+                <li>Selectores de ID: 1-0-0</li>
+                <li>Selectores de clase: 0-1-0</li>
+                <li>Estilos de tipo: 0-0-1</li>
+            </ol>
+        </p>
+
+        <h3>Selectores de tipo</h3>
+        <p>
+            Los selectores de tipo se utilizan para seleccionar y aplicar estilos
+            a todos los elementos de una etiqueta específica. Para esto, se utiliza
+            el nombre normal de la etiqueta al definir el estilo:
+        </p>
+        <img src="../images/selector.png" alt="selector-img">
+        <p>
+            En el ejemplo anterior, el selector <code>h1</code> indica que se le
+            aplicará el color azul y color de fondo amarillo a todos los elementos
+            con la etiqueta <code>&lt;h1&gt;</code> del HTML al que esté conectado.
+            Lo mismo ocurre con el color rojo para los elementos con etiqueta
+             <code>&lt;p&gt;</code>.
+        </p>
+
+        <h3>Selectores de clase</h3>
+        <p>
+            Los selectores de clase se utilizan para seleccionar y aplicar estilos
+            a un grupo de elementos con la misma clase. Para esto, se utiliza un punto
+            antes del nombre de la clase al definir el estilo:
+        </p>
+<pre><code>.clase {
+    color: blue;
+}</code></pre>
+        <p>
+            Para aplicar la clase a un elemento HTML, se utiliza el atributo <code>class</code>:
+        </p>
+<pre><code>&lt;p class="clase"&gt;Este párrafo pertenece a la clase "clase"&lt;/p&gt;</code></pre>
+
+        <h3>Selectores de ID</h3>
+        <p>
+            Los selectores de ID se utilizan para seleccionar y aplicar estilos
+            a un elemento único con un ID. Para esto, se utiliza el símbolo <i>#</i>
+            antes del nombre del ID al que se aplicará un estilo:
+        </p>
+<pre><code>#id {
+    color: red;
+}</code></pre>
+        <p>
+            Para aplicar el ID a un elemento HTML, se utiliza el atributo <code>id</code>:
+        </p>
+<pre><code>&lt;p id="id"&gt;Este párrafo pertenece al ID "id"&lt;/p&gt;</code></pre>
+        
+    </section>
+
+    <!-- Sección de propiedades -->
+    <section id="propiedades">
+        <h2>Propiedades</h2>
+        <p>
+            Las propiedades son los valores que se le pueden asignar a los elementos de la página
+            para modificar su apariencia. Algunas de las propiedades más comunes y que se utilizaron
+            en este blog son las siguientes:
+        </p>
+        <table>
+            <tr>
+                <th>Propiedad</th>
+                <th>Descripción</th>
+                <th>Ejemplo</th>
+            </tr>
+            <tr>
+                <td>border</td>
+                <td>Borde de un elemento</td>
+                <td>border: 1px solid black;</td>
+            </tr>
+            <tr>
+                <td>border-left</td>
+                <td>Borde izquierdo</td>
+                <td>border-left: 1px solid black;</td>
+            </tr>
+            <tr>
+                <td>border-right</td>
+                <td>Borde derecho</td>
+                <td>border-right: 1px solid black;</td>
+            </tr>
+            <tr>
+                <td>border-top</td>
+                <td>Borde superior</td>
+                <td>border-top: 1px solid black;</td>
+            </tr>
+            <tr>
+                <td>border-bottom</td>
+                <td>Borde inferior</td>
+                <td>border-bottom: 1px solid black;</td>
+            </tr>
+            <tr>
+                <td>border-radius</td>
+                <td>Radio de las esquinas</td>
+                <td>border-radius: 10px;</td>
+            </tr>
+            <tr>
+                <td>background-image</td>
+                <td>Imagen de fondo</td>
+                <td>background-image: url("imagen.png");</td>
+            </tr>
+            <tr>
+                <td>color</td>
+                <td>Color del texto</td>
+                <td>color: red;</td>
+            </tr>
+            <tr>
+                <td>font</td>
+                <td>Fuente del texto</td>
+                <td>font: 16px sans-serif;</td>
+            </tr>
+            <tr>
+                <td>font-family</td>
+                <td>Familia de la fuente</td>
+                <td>font-family: sans-serif;</td>
+            </tr>
+            <tr>
+                <td>font-style</td>
+                <td>Estilo de la fuente</td>
+                <td>font-style: italic;</td>
+            </tr>
+            <tr>
+                <td>font-weight</td>
+                <td>Grosor de la fuente</td>
+                <td>font-weight: bold;</td>
+            </tr>
+            <tr>
+                <td>margin</td>
+                <td>Margen del elemento</td>
+                <td>margin: 10px;</td>
+            </tr>
+            <tr>
+                <td>padding</td>
+                <td>Relleno del elemento</td>
+                <td>padding: 10px;</td>
+            </tr>
+            <tr>
+                <td>overflow</td>
+                <td>Manejo de desbordamiento</td>
+                <td>overflow: hidden;</td>
+            </tr>
+        </table>
+    </section>
+
+    <!-- Sección de valores -->
+    <section id="valores">
+        <h2>Valores</h2>
+        <p>
+            Los valores son una forma de definir subvalores admitidos; es decir, los
+            los datos que se le asignan a las propiedades utilizadas para modificar
+            la apariencia de los elementos de la página. Algunos ejemplos son los
+            siguientes:
+        </p>
+        <ul>
+            <li>Colores: <code>white</code>, <code>black</code> o <code>#ff0000</code></li>
+            <li>Fuentes: <code>serif</code>, <code>sans-serif</code> o <code>monospace</code></li>
+            <li>Unidades: <code>px</code> (pixeles), <code>em</code> (ramaño de letra del elemento padre), <code>vw</code> (ancho de la ventana gráfica), <code>cm</code> (centímetros), etc.</li>
+        </ul>
+    </section>
+
+    <!-- Sección de referencias -->
+    <section id="referencias">
+        <h2>Referencias</h2>   
+        <ul>
+            <li><a href="https://lenguajecss.com/css/introduccion/que-es-css/">¿Qué es CSS?</a></li>
+            <li><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/Reference#index">Referencia de Propiedades de CSS</a></li>
+            <li><a href="https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/Styling_basics/Basic_selectors">Selectores CSS básicos</a></li>
+            <li><a href="https://learn.shayhowe.com/html-css/getting-to-know-css/">Conociendo CSS</a></li>
+            <li><a href="https://developer.mozilla.org/es/docs/Web/CSS/Shorthand_properties">Propiedades de CSS</a></li>
+            <li><a href="https://developer.mozilla.org/es/docs/Learn_web_development/Core/Styling_basics/Values_and_units">Valores de CSS</a></li>
+        </ul>
+    </section>
+
+    <!-- Final de la página -->
+    <footer>
+        <p>Diego Córdova Rodríguez</p>
+        <a href="">Regresar al Inicio</a>
+    </footer>
+
+</body>
+</html>

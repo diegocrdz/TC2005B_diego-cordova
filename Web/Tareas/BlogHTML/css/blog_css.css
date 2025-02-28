@@ -1,0 +1,201 @@
+/*
+ * Archivo de estilos CSS para el blog
+ *
+ * Diego Córdova Rodríguez, A01781166
+ */
+
+html {
+    font-family: Arial, sans-serif; /* Fuente predeterminada */
+    font-size: 16px; /* Tamaño de la fuente */
+    background-color: #1b1b1b; /* Color de fondo */
+    color: #a6a6a6; /* Color de la fuente */
+}
+
+body {
+    margin: 0;
+    padding: 0;
+}
+
+section {
+    padding: 20px; /* Relleno de 20px a los lados */
+}
+
+hr {
+    border: none; /* Elimina el borde predeterminado */
+    height: 4px; /* Define el grosor */
+    background-color: #1f262c; /* Color de la línea */
+    margin: 0;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    color: #f0f0f0; /* Color de los títulos */
+    font-size: 2em; /* Tamaño de la fuente */
+}
+h2 {
+    margin-top: 0; /* Elimina el margen superior solo para los titulos h2 */
+}
+ul {
+    margin: 0; /* Elimina el margen de las listas */
+}
+a {
+    color: #66798a; /* Color de los enlaces */
+    text-decoration: underline; /* Elimina el subrayado */
+}
+
+code {
+    background-color: #324359; /* Color de fondo */
+    border-radius: 2px; /* Bordes redondeados */
+    color: #f0f0f0; /* Color de la fuente */
+    padding: 2px; /* Relleno de 2px */
+}
+
+img {
+    max-width: 100%; /* Imágenes con ancho máximo */
+    height: auto; /* Altura automática */
+    /* Borde y relleno para las imágenes */
+    border: 2px solid #66798a;
+    border-radius: 10px;
+    padding: 5px;
+}
+img:hover {
+    border-color: #f0f0f0; /* Cambia el color del borde al pasar el mouse */
+}
+
+/* Estilos para el inicio de la página */
+header {
+    background-color: #334453;
+    color: white;
+    display: flex;
+    flex-direction: column;
+}
+
+header h1 {
+    margin: 0; /* Elimina el margen del título */
+    font: 20px sans-serif; /* Fuente y tamaño del título */
+    padding: 20px 0; /* Relleno de 10px arriba y abajo, 0 a los lados */
+    text-align: center;
+    font-style: italic;
+}
+
+header nav {
+    background-color: #1f262c;
+    padding: 15px 0; /* Relleno de 10px arriba y abajo, 0 a los lados */
+}
+
+/* Listas del header */
+header nav ul {
+    padding: 0;
+    margin: 0;
+    list-style-type: none; /* Elimina las viñetas */
+    display: flex; /* Flex sirve para alinear elementos */
+    justify-content: center; /* Centra los elementos */
+}
+
+/* Elementos de las listas */
+header nav ul li {
+    margin-right: 5px; /* Agrega un pequeño margen entre elementos */
+}
+
+header nav ul li a {
+    color: #f0f0f0;
+    text-decoration: none; /* Elimina el subrayado */
+    padding: 15px;
+}
+
+header nav ul li a:hover {
+    background-color: #181c20;
+}
+
+/* Estilos para la sección de títulos */
+.titulo {
+    text-align: center;
+}
+
+/* Estilos para las imágenes de los artículos */
+.titulo {
+    background-size: cover;
+    background-color: rgba(0, 0, 0, 0.7); /* Capa oscura */
+    background-blend-mode: multiply; /* Mezcla con la imagen */
+    background-position: center; /* Centra la imagen */
+    color: white;
+    text-align: center;
+    padding: 50px;
+}
+/* Imágenes de los títulos */
+#titulo-inicio {
+    background-image: url("https://64.media.tumblr.com/fc671558a154e20251fc7e75ccba938a/tumblr_p29irjTxms1wvcbfqo1_1280.gif");
+}
+#titulo-git-github {
+    background-image: url("https://media.licdn.com/dms/image/v2/D5612AQEHjHsF9lTb4g/article-cover_image-shrink_720_1280/article-cover_image-shrink_720_1280/0/1704638069482?e=2147483647&v=beta&t=O3fGpvhM6gOPgBSl1hAew2lFghyIIaem4da1XBwX3mc");
+}
+#titulo-terminal {
+    background-image: url("https://computernewage.com/wp-content/uploads/2014/09/leer-archivos-de-texto-desde-la-terminal-de-linux.png?w=1200");
+}
+#titulo-css {
+    background-image: url("https://assets.digitalocean.com/labs/images/community_bg.png");
+}
+
+#bienvenida {
+    /* Fondo degradado */
+    background-image: linear-gradient(to left, #334453, #1f262c);
+    color: white;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    font-size: large;
+}
+#bienvenida img {
+    border: none; /* Elimina el borde de la imagen */
+    width: 50%;
+    height: auto;
+}
+#que-es-css ul {
+    margin-top: 20px; /* Agrega un margen superior */
+    list-style: decimal; /* Cambia el tipo de viñeta */
+}
+
+/* Estilos para el final de la página */
+footer {
+    background-color: #1f262c;
+    color: white;
+    text-align: center;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+}
+
+footer p {
+    background-color: #334453;
+    padding: 20px 0;
+    margin: 0;
+    width: 100%;
+}
+
+footer a {
+    padding: 20px;
+    color: white;
+    text-decoration: none; /* Elimina el subrayado */
+}
+
+footer a:hover {
+    background-color: #181c20;
+}
+
+/* Estilos para las tablas */
+table {
+    width: 100%;
+    border-collapse: collapse; /* Combina los bordes de las celdas */
+    border: 2px solid #a6a6a6;
+    overflow: auto; /* Permite desplazamiento horizontal si se desborda la información */
+}
+
+/* Agrega un borde y relleno a las celdas de la tabla */
+table th, table td {
+    border: 1px solid #a6a6a6;
+    padding: 5px;
+}
+
+/* Estilos para las celdas de encabezado */
+table th {
+    background-color: #1f262c;
+}
