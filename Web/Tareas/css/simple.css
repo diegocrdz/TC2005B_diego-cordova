@@ -1,0 +1,96 @@
+body {
+    margin: 0; /* Elimina el margen del cuerpo de la página */
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+/* Header */
+header {
+    display: flex; /* Mostramos el elemento como flexbox */
+    justify-content: space-between; /* Ajusta los elementos horizontalmente a lo largo del contenedor*/
+    align-items: center; /* Alinea los elementos verticalmente dentro del contenedor */
+
+    padding: 0 80px; /* Relleno a la izquierda y derecha */
+
+    color: white; /* Color del texto */
+    background-color: rgb(49, 73, 81); /* Color de fondo */
+}
+
+/* Elementos de navegación */
+header nav a {
+    padding: 0px 3px;
+    color: white;
+    text-decoration: none;
+}
+
+/* Elementos de la sección inicial */
+main {
+    display: flex;
+    flex-direction: column; /* Muestra los elementos en columna */
+    align-items: center;
+
+    color: white;
+    background-color: rgb(214, 122, 17);
+
+    padding: 50px 100px; /* Relleno arriba-abajo, izquierda-derecha */
+}
+
+/* Titulo principal */
+main h2 {
+    font-size: 2em;
+}
+
+/* Sección de suscripción */
+#subscribeSection {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    padding: 20px;
+
+    color: white;
+    background-color: rgb(49, 73, 81);
+}
+/* Párrafo de suscripción */
+#subscribeSection p {
+    font-weight: bold; /* Texto en negrita */
+}
+/* Formulario de suscripción */
+#subscribeSection form {
+    margin-left: 40px; /* Margen usado para separar ligeramente p y form */
+}
+/* Botón de suscripción */
+#subscribeSection button {
+    color: white;
+    background-color: rgb(214, 122, 17);
+    border: black 2px solid; /* Borde negro sólido de 2px */
+}
+
+/* Sección de imágenes */
+#imageSection {
+    display: flex;
+    justify-content: space-evenly; /* Separa los elementos de igual forma */
+    align-items: center;
+    padding: 30px;
+}
+/* Para cada división en la sección de imágenes */
+#imageSection div {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+/* Para los párrafos de cada división */
+#imageSection div p {
+    margin-bottom: 0; /* Elimina el margen inferior por defecto para tener balance visual */
+}
+
+/* Sección final de la página */
+footer {
+    display: flex;
+    justify-content: center;
+    align-content: center;
+
+    padding: 10px;
+
+    color: white;
+    background-color: rgb(49, 73, 81);;
+}
