@@ -11,7 +11,7 @@ html {
     color: #a6a6a6; /* Color de la fuente */
 }
 
-body {
+body { /* Eliminamos el margen y relleno pordefecto */
     margin: 0;
     padding: 0;
 }
@@ -66,44 +66,31 @@ header {
     background-color: #334453;
     color: white;
     display: flex;
-    flex-direction: column;
+    flex-direction: column; /* Alinea los elementos en columna */
+    align-items: center; /* Alinea los elementos verticalmente */
 }
-
 header h1 {
+    background-color: #1f262c;
+    width: 100%;
     margin: 0; /* Elimina el margen del título */
     font: 20px sans-serif; /* Fuente y tamaño del título */
     padding: 20px 0; /* Relleno de 10px arriba y abajo, 0 a los lados */
     text-align: center;
     font-style: italic;
+    font-weight: bold;
 }
-
 header nav {
-    background-color: #1f262c;
-    padding: 15px 0; /* Relleno de 10px arriba y abajo, 0 a los lados */
+    flex-direction: row;
+    padding: 10px 0; /* Relleno arriba-abajo, izquierda-derecha */
 }
-
-/* Listas del header */
-header nav ul {
-    padding: 0;
-    margin: 0;
-    list-style-type: none; /* Elimina las viñetas */
-    display: flex; /* Flex sirve para alinear elementos */
-    justify-content: center; /* Centra los elementos */
-}
-
-/* Elementos de las listas */
-header nav ul li {
-    margin-right: 5px; /* Agrega un pequeño margen entre elementos */
-}
-
-header nav ul li a {
-    color: #f0f0f0;
+header nav a {
+    color: white;
     text-decoration: none; /* Elimina el subrayado */
-    padding: 15px;
+    font-weight: bold;
+    padding: 10px; /* Relleno arriba-abajo, izquierda-derecha */
 }
-
-header nav ul li a:hover {
-    background-color: #181c20;
+header nav a:hover {
+    background-color: #2f3c4a; /* Cambia el color al pasar el mouse */
 }
 
 /* Estilos para la sección de títulos */
@@ -140,14 +127,16 @@ header nav ul li a:hover {
     background-image: linear-gradient(to left, #334453, #1f262c);
     color: white;
     display: flex;
-    flex-direction: row;
+    justify-content: center;
     align-items: center;
-    font-size: large;
 }
 #bienvenida img {
     border: none; /* Elimina el borde de la imagen */
     width: 50%;
     height: auto;
+}
+#bienvenida div {
+    padding-right: 20px; /* Relleno a la derecha */
 }
 #que-es-css ul {
     margin-top: 20px; /* Agrega un margen superior */
@@ -156,29 +145,26 @@ header nav ul li a:hover {
 
 /* Estilos para el final de la página */
 footer {
-    background-color: #1f262c;
+    background-color: #334453;
     color: white;
     text-align: center;
     align-items: center;
     display: flex;
     flex-direction: column;
 }
-
 footer p {
-    background-color: #334453;
-    padding: 20px 0;
+    background-color: #1f262c;
+    padding: 10px 0;
     margin: 0;
     width: 100%;
 }
-
 footer a {
-    padding: 20px;
+    padding: 10px;
     color: white;
     text-decoration: none; /* Elimina el subrayado */
 }
-
 footer a:hover {
-    background-color: #181c20;
+    background-color: #2f3c4a;
 }
 
 /* Estilos para las tablas */
