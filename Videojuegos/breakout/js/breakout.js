@@ -17,6 +17,7 @@ const speedIncrease = 1.05;
 const initalSpeed = 0.5;
 
 let life = 3;
+let score = 0;
 
 // Context of the Canvas
 let ctx;
@@ -74,26 +75,45 @@ class Paddle extends GameObject {
     }
 }
 
+// Class for creating each block
 class Block extends GameObject {
 
-    constructor(position, width, height, color, type) { // constructor of the class
+    constructor(position, width, height, color) { // constructor of the class
         super(position, width, height, color, "block"); // super calls the constructor of the parent class
     }
+}
 
-    generateBlocks(arrows, columns) {
-        let blocks = [];
+// Class for creating the blocks
+class BlockGenerator {
+
+    constructor() {
+        this.blocks = []; // Array to store the blocks
+    }
+
+    // Function to generate the blocks
+    generateBlocks(rows, columns) {
+
+        const blockSpacing = 10; // Space between blocks
+        const totalSpacing = blockSpacing * (columns - 1); // Total space between blocks
+        const blockWidth = (canvasWidth - 40) / columns; // Calculate block width
+        const blockHeight = 20; // Fixed block height
         
-        let blockWidth = canvasWidth / columns - 5;
-        let blockHeight = 20;
-        let blockColor = "orange";
+        for (let i = 0; i < rows; i++) {
 
-        for (let i = 0; i < columns; i++) {
-            for (let j = 0; j < arrows; j++) {
-                let block = new Block(new Vec(i * blockWidth, j * blockHeight), blockWidth, blockHeight, blockColor, "block");
-                blocks.push(block);
+            for (let j = 0; j < columns; j++) {
+
+                let block = new Block(new Vec(20 + j * blockWidth, 20 + i * blockHeight), blockWidth, blockHeight, "white", "block");
+                // To determine the position of each block:
+                // 1. The initial position is 20, 20, that's why we add 20 to the x and y coordinates
+                // 2. We multiply the block width by the column number to get the x coordinate
+                // 3. We multiply the block height by the row number to get the y coordinate
+                // Example:
+                // 1st block, i = 0, j = 0, so the position is (20, 20)
+                // 2nd block, i = 0, j = 1, so the position is (20 + blockWidth, 20 + blockHeight)
+
+                this.blocks.push(block);
             }
         }
-        return blocks;
     }
 }
 
@@ -130,10 +150,11 @@ const bottomBar = new GameObject(new Vec(0, canvasHeight - 20), canvasWidth, 20,
 const leftBar = new GameObject(new Vec(0, 0), 20, canvasHeight, "gray", "obstacle");
 const rightBar = new GameObject(new Vec(canvasWidth - 20, 0), 20, canvasHeight, "gray", "obstacle");
 // Lifes label
-const lifesLabel = new TextLabel(canvasWidth * 3 / 10, canvasHeight * 2 / 10, "40px Ubuntu Mono", "white");
+const lifesLabel = new TextLabel(canvasWidth - 100, 20, "20px Ubuntu Mono", "black");
+const scoreLabel = new TextLabel(20, 20, "20px Ubuntu Mono", "black");
 // Blocks
-const blockGenerator = new Block();
-const blocks = blockGenerator.generateBlocks(5, 10);
+const blockGenerator = new BlockGenerator();
+blockGenerator.generateBlocks(5, 10);
 
 // Main function of the game
 
@@ -205,9 +226,10 @@ function drawScene(newTime) {
 
     // Draw scorebaord
     lifesLabel.draw(ctx, "Lifes: " + life);
+    scoreLabel.draw(ctx, "Score: " + score);
 
     // Draw blocks
-    for (let block of blocks) {
+    for (let block of blockGenerator.blocks) {
         block.draw(ctx);
     }
 
@@ -215,30 +237,31 @@ function drawScene(newTime) {
     box.update(deltaTime);
     paddle.update(deltaTime);
 
-    // Make the ball bounce at the boundaries
+    // If the ball hits the paddle, the speed increases and the ball changes direction
     if (boxOverlap(box, paddle)) {
         box.velocity.y *= -1;
         box.velocity = box.velocity.times(speedIncrease);
     }
-    if (boxOverlap(box, bottomBar) && life > 0) {
-        life--;
-    }
-    if (boxOverlap(box, rightBar)) {
-        box.velocity.x *= -1;
-    }
-    if (boxOverlap(box, leftBar)) {
+
+    // If the ball hits a bar, the ball changes direction
+    if (boxOverlap(box, rightBar) || boxOverlap(box, leftBar)) {
         box.velocity.x *= -1;
     }
     if (boxOverlap(box, topBar) || boxOverlap(box, bottomBar)) {
         box.velocity.y *= -1;
     }
 
-
+    // If the ball hits the bottom bar, the player loses a life
+    if (boxOverlap(box, bottomBar) && life > 0) {
+        life--;
+    }
+    // If the player has no more lifes, the game resets
     if (life == 0) {
         box.reset();
         life = 3;
     }
-    
+
+    // If the ball hits a block, the block is removed and the score increases
 
     oldTime = newTime;
     requestAnimationFrame(drawScene);
