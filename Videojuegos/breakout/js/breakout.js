@@ -60,8 +60,8 @@ class Paddle extends GameObject {
         this.position = this.position.plus(this.velocity.times(deltaTime)); // d = v * t
 
         // Collision detection between the paddles and the canvas
-        if (this.position.y < 20) {
-            this.position.y = 20;
+        if (this.position.y < 3 * (canvasHeight / 4)) {
+            this.position.y = 3 * (canvasHeight / 4);
         }
         else if (this.position.y > canvasHeight - 20 - this.height) {
             this.position.y = canvasHeight - 20 - this.height;
@@ -88,21 +88,26 @@ class BlockGenerator {
 
     constructor() {
         this.blocks = []; // Array to store the blocks
+        this.colors = ["red", "green", "blue", "yellow", "purple"]; // Array with the colors of the blocks
     }
 
     // Function to generate the blocks
     generateBlocks(rows, columns) {
 
         const blockSpacing = 10; // Space between blocks
-        const totalSpacing = blockSpacing * (columns - 1); // Total space between blocks
-        const blockWidth = (canvasWidth - 40) / columns; // Calculate block width
-        const blockHeight = 20; // Fixed block height
+        const blockWidth = (canvasWidth - 20) / columns; // Calculate block width
+        const blockHeight = (canvasHeight / 4) / rows; // Fixed block height
         
         for (let i = 0; i < rows; i++) {
 
+            // Select a random color for weach row
+            let random = Math.floor(Math.random() * this.colors.length); // Random color
+            let color = this.colors[random]; // Assign the random color to the row of blocks
+            this.colors.splice(random, 1); // Remove the color from the array so that it doesnt repeat
+
             for (let j = 0; j < columns; j++) {
 
-                let block = new Block(new Vec(20 + j * blockWidth, 20 + i * blockHeight), blockWidth, blockHeight, "white", "block");
+                let block = new Block(new Vec(20 + j * blockWidth, 20 + i * blockHeight), blockWidth - blockSpacing, blockHeight - blockSpacing, color, "block");
                 // To determine the position of each block:
                 // 1. The initial position is 20, 20, that's why we add 20 to the x and y coordinates
                 // 2. We multiply the block width by the column number to get the x coordinate
@@ -113,6 +118,13 @@ class BlockGenerator {
 
                 this.blocks.push(block);
             }
+        }
+    }
+
+    update(deltaTime) {
+
+        for (let block of this.blocks) {
+            block.update(deltaTime);
         }
     }
 }
@@ -215,6 +227,11 @@ function drawScene(newTime) {
     // Clean the canvas so we can draw everything again
     ctx.clearRect(0, 0, canvasWidth, canvasHeight);
 
+    // Draw blocks
+    for (let block of blockGenerator.blocks) {
+        block.draw(ctx);
+    }
+
     // Draw elements
     box.draw(ctx);
     paddle.draw(ctx);
@@ -227,11 +244,6 @@ function drawScene(newTime) {
     // Draw scorebaord
     lifesLabel.draw(ctx, "Lifes: " + life);
     scoreLabel.draw(ctx, "Score: " + score);
-
-    // Draw blocks
-    for (let block of blockGenerator.blocks) {
-        block.draw(ctx);
-    }
 
     // Update the properties of the objects
     box.update(deltaTime);
@@ -258,10 +270,19 @@ function drawScene(newTime) {
     // If the player has no more lifes, the game resets
     if (life == 0) {
         box.reset();
+        blockGenerator.generateBlocks(5, 10);
+        score = 0;
         life = 3;
     }
 
     // If the ball hits a block, the block is removed and the score increases
+    for (let block of blockGenerator.blocks) {
+        if (boxOverlap(box, block) && block.color != "black") {
+            block.color = "black"; // Mark the block as hit
+            box.velocity.y *= -1; // Change the ball's direction
+            score++; // Increase the score
+        }
+    }
 
     oldTime = newTime;
     requestAnimationFrame(drawScene);

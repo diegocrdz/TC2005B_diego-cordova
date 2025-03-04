@@ -28,17 +28,6 @@ class Vec {
     }
 }
 
-/* Test the vector class
-
-let a = new Vec(3, 7);
-let b = new Vec(-2, 5);
-console.log("plus:", a.plus(b));
-console.log("minus:", a.minus(b));
-console.log("times:", a.times(3));
-console.log("magnitude:", a.magnitude());
-
-*/
-
 class GameObject {
     constructor(position, width, height, color, type) {
         this.position = position;
