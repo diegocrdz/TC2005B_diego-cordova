@@ -27,6 +27,7 @@
 
     <!-- Sección de qué es CSS -->
     <section id="que-es-css">
+        <p>5 de marzo de 2025</p>
         <h2>¿Qué es CSS?</h2>
         <p>
             CSS (Cascading Style Sheets) es un lenguaje de diseño utilizado para
@@ -38,7 +39,6 @@
             CSS es denomminado como estilos en cascada debido a que el código se lee
             y aplica de arriba hacia abajo.
         </p>
-        <img src="../images/css_basics.png" alt="">
         <ul>
             <li><a href="#como-se-utiliza-css">¿Cómo se utiliza CSS?</a></li>
             <li><a href="#como-ligar-css-html">¿Cómo ligar un CSS a un HTML?</a></li>
@@ -96,6 +96,9 @@
                 <li>Estilos de tipo: 0-0-1</li>
             </ol>
         </p>
+        <div class="img-container">
+            <img src="../images/css_basics.png" alt="">
+        </div>
 
         <h3>Selectores de tipo</h3>
         <p>
@@ -103,7 +106,9 @@
             a todos los elementos de una etiqueta específica. Para esto, se utiliza
             el nombre normal de la etiqueta al definir el estilo:
         </p>
-        <img src="../images/selector.png" alt="selector-img">
+        <div class="img-container">
+            <img src="../images/selector.png" alt="selector-img">
+        </div>
         <p>
             En el ejemplo anterior, el selector <code>h1</code> indica que se le
             aplicará el color azul y color de fondo amarillo a todos los elementos
@@ -119,7 +124,7 @@
             antes del nombre de la clase al definir el estilo:
         </p>
 <pre><code>.clase {
-    color: blue;
+color: blue;
 }</code></pre>
         <p>
             Para aplicar la clase a un elemento HTML, se utiliza el atributo <code>class</code>:
