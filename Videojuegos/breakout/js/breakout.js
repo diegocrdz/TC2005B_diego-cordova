@@ -7,28 +7,39 @@
 
 "use strict";
 
-// Global variables
+// Canvas variables
 const canvasWidth = 800;
 const canvasHeight = 600;
 
+// Time variables
 let oldTime;
-const paddleVelocity = 0.5;
+const paddleVelocity = 1;
 const speedIncrease = 1.05;
 const initalSpeed = 0.5;
 
-let life = 3;
+// Game variables
+let lives = 3;
 let score = 0;
+let gameOver = false;
+let waitingForContinue = false;
+let win = false;
+let powerUps = []; // Array to store the powerups
+let powerUpTypes = ["paddle", "ball", "life"];
 
 // Context of the Canvas
 let ctx;
 
-// Classes fot the Pong game
+// Classes for the game
+
+// Class that represents a ball in the game
 class Ball extends GameObject {
 
     constructor(position, width, height, color, velocity) { // constructor of the class
         super(position, width, height, color, "ball"); // super calls the constructor of the parent class
-        this.initVelocity();
-        this.inPlay = false;
+        this.width = width;
+        this.height = height;
+        this.inPlay = false; // Boolean to determine if the ball is in play
+        this.initVelocity(); // Initialize the velocity of the ball
     }
 
     update(deltaTime) {
@@ -42,10 +53,12 @@ class Ball extends GameObject {
         this.velocity = new Vec(Math.cos(angle), Math.sin(angle)).times(initalSpeed);
     }
 
-    reset () {
+    reset() {
         this.inPlay = false;
         this.position = new Vec(canvasWidth / 2, canvasHeight / 2);
         this.velocity = new Vec(0, 0);
+        this.width = 15;
+        this.height = 15;
     }
 }
 
@@ -54,6 +67,10 @@ class Paddle extends GameObject {
     constructor(position, width, height, color, velocity) { // constructor of the class
         super(position, width, height, color, "paddle"); // super calls the constructor of the parent class
         this.velocity = new Vec(0.0, 0.0);
+    }
+
+    resetWidth() {
+        this.width = 80;
     }
 
     update(deltaTime) {
@@ -88,22 +105,23 @@ class BlockGenerator {
 
     constructor() {
         this.blocks = []; // Array to store the blocks
-        this.colors = ["red", "green", "blue", "yellow", "purple"]; // Array with the colors of the blocks
     }
 
     // Function to generate the blocks
     generateBlocks(rows, columns) {
 
-        const blockSpacing = 10; // Space between blocks
-        const blockWidth = (canvasWidth - 20) / columns; // Calculate block width
-        const blockHeight = (canvasHeight / 4) / rows; // Fixed block height
+        let colors = ["red", "green", "blue", "yellow", "purple"]; // Array with the colors of the blocks
+
+        const blockSpacing = 5; // Space between blocks
+        const blockWidth = (canvasWidth - 30) / columns; // Calculate block width
+        const blockHeight = (canvasHeight / 4) / rows; // Calculate block height
         
         for (let i = 0; i < rows; i++) {
 
             // Select a random color for weach row
-            let random = Math.floor(Math.random() * this.colors.length); // Random color
-            let color = this.colors[random]; // Assign the random color to the row of blocks
-            this.colors.splice(random, 1); // Remove the color from the array so that it doesnt repeat
+            let random = Math.floor(Math.random() * colors.length); // Random color
+            let color = colors[random]; // Assign the random color to the row of blocks
+            colors.splice(random, 1); // Remove the color from the array so that it doesnt repeat
 
             for (let j = 0; j < columns; j++) {
 
@@ -121,52 +139,45 @@ class BlockGenerator {
         }
     }
 
-    update(deltaTime) {
-
-        for (let block of this.blocks) {
-            block.update(deltaTime);
-        }
+    // Function to clear the blocks
+    clearBlocks() {
+        this.blocks = [];
     }
 }
 
-/*
-class Game {
-    constructor(state) {
-        this.state = state;
+class PowerUp extends GameObject {
 
-        this.initObjects();
-
-        this.addEventListeners();
-
-        this.scoreLabelLeft = new TextLabel(canvasWidth * 3 / 10, canvasHeight * 2 / 10, "40px Ubuntu Mono", "black");
-        this.scoreLabelRight = new TextLabel(canvasWidth * 7 / 10, canvasHeight * 2 / 10, "40px Ubuntu Mono", "black");
+    constructor(position, width, height, color, type) { // constructor of the class
+        super(position, width, height, "yellow", "powerup"); // super calls the constructor of the parent class
+        this.velocity = new Vec(0.0, 0.1); // The powerup falls down
     }
 
     update(deltaTime) {
-        for (let actor of this.actors) {
-            actor.update(deltaTime);
-        }
+        this.position = this.position.plus(this.velocity.times(deltaTime)); // d = v * t
     }
 }
-*/
 
 // Objects to represent elements of the game
 
 // Box
-const box = new Ball(new Vec(canvasWidth / 2, canvasHeight / 2), 20, 20, "white");
+const box = new Ball(new Vec(canvasWidth / 2, canvasHeight / 2), 15, 15, "white");
 // Paddles
-const paddle = new Paddle(new Vec(canvasWidth / 2 - 75, canvasHeight), 150, 20, "white");
+const paddle = new Paddle(new Vec(canvasWidth / 2 - 75, canvasHeight), 80, 15, "white");
 // Bars
 const topBar = new GameObject(new Vec(0, 0), canvasWidth, 20, "gray", "obstacle");
 const bottomBar = new GameObject(new Vec(0, canvasHeight - 20), canvasWidth, 20, "gray", "obstacle");
 const leftBar = new GameObject(new Vec(0, 0), 20, canvasHeight, "gray", "obstacle");
 const rightBar = new GameObject(new Vec(canvasWidth - 20, 0), 20, canvasHeight, "gray", "obstacle");
 // Lifes label
-const lifesLabel = new TextLabel(canvasWidth - 100, 20, "20px Ubuntu Mono", "black");
+const livesLabel = new TextLabel(canvasWidth - 100, 20, "20px Ubuntu Mono", "black");
 const scoreLabel = new TextLabel(20, 20, "20px Ubuntu Mono", "black");
 // Blocks
 const blockGenerator = new BlockGenerator();
 blockGenerator.generateBlocks(5, 10);
+// Continue label
+const continueLabel = new TextLabel(canvasWidth / 2 - 120, 2 * canvasHeight / 3, "30px Ubuntu Mono", "white");
+const gameOverLabel = new TextLabel(canvasWidth / 2 - 60, 2 * canvasHeight / 3 - 40, "30px Ubuntu Mono", "white");
+const winLabel = new TextLabel(canvasWidth / 2 - 60, 2 * canvasHeight / 3 - 40, "30px Ubuntu Mono", "white");
 
 // Main function of the game
 
@@ -179,6 +190,16 @@ function main() {
     // Get the context for drawing in 2D
     ctx = canvas.getContext('2d');
 
+    // Get the button to start the game in the page
+    document.getElementById('startGame').addEventListener('click', () => {
+        // Get the values of the rows and columns from the input fields
+        let rows = parseInt(document.getElementById('rows').value);
+        let cols = parseInt(document.getElementById('cols').value);
+
+        // Restart the game with the new values
+        restartGame(rows, cols);
+    });
+
     createEventListeners();
 
     drawScene(0);
@@ -189,21 +210,34 @@ function createEventListeners() {
     // When a key is pressed, the event is triggered
     window.addEventListener('keydown', (event) => {
 
+        // Move the paddle
         if (event.key == 'a') { // Left
             paddle.velocity = new Vec(- paddleVelocity, 0);
         }
-        else if (event.key == 'd') { // Right
+        if (event.key == 'd') { // Right
             paddle.velocity = new Vec(paddleVelocity, 0);
         }
-
         if (event.key == 'w') { // Up
             paddle.velocity = new Vec(0, - paddleVelocity);
         }
-        else if (event.key == 's') { // Down
+        if (event.key == 's') { // Down
             paddle.velocity = new Vec(0, paddleVelocity);
         } 
 
+        // Start the game
         if (event.key == ' ' && !box.inPlay) {
+            box.initVelocity();
+            waitingForContinue = false;
+            gameOver = false;
+        }
+
+        // Restart the game
+        if (event.key == 'r') {
+            restartGame(rows, columns);
+        }
+        if (event.key == ' ' && win) {
+            restartGame(rows, columns);
+            win = false;
             box.initVelocity();
         }
     });
@@ -215,6 +249,18 @@ function createEventListeners() {
             paddle.velocity = new Vec(0, 0);
         }
     });
+}
+
+function restartGame(rows, columns) {
+    gameOver = false;
+    waitingForContinue = false;
+    score = 0;
+    lives = 3;
+    box.reset();
+    blockGenerator.clearBlocks();
+    blockGenerator.generateBlocks(rows, columns);
+    powerUps = [];
+    paddle.resetWidth();
 }
 
 function drawScene(newTime) {
@@ -242,8 +288,23 @@ function drawScene(newTime) {
     bottomBar.draw(ctx);
 
     // Draw scorebaord
-    lifesLabel.draw(ctx, "Lifes: " + life);
+    livesLabel.draw(ctx, "Lives: " + lives);
     scoreLabel.draw(ctx, "Score: " + score);
+
+    // Draw game over label
+    if (gameOver) {
+        gameOverLabel.draw(ctx, "Game Over");
+        continueLabel.draw(ctx, "Press 'space' to continue");
+    }
+    // Draw continue label
+    else if (waitingForContinue) {
+        continueLabel.draw(ctx, "Press 'space' to continue");
+    }
+    // Draw win label
+    else if (win) {
+        winLabel.draw(ctx, "You win!");
+        continueLabel.draw(ctx, "Press 'space' to restart");
+    }
 
     // Update the properties of the objects
     box.update(deltaTime);
@@ -264,24 +325,82 @@ function drawScene(newTime) {
     }
 
     // If the ball hits the bottom bar, the player loses a life
-    if (boxOverlap(box, bottomBar) && life > 0) {
-        life--;
-    }
-    // If the player has no more lifes, the game resets
-    if (life == 0) {
+    if (boxOverlap(box, bottomBar) && lives > 0) {
+        lives--;
         box.reset();
-        blockGenerator.generateBlocks(5, 10);
-        score = 0;
-        life = 3;
+        waitingForContinue = true;
+        paddle.resetWidth(); // Reset the width of the paddle
+        powerUps = []; // Remove all powerups
+    }
+
+    // If the player has no more lives, the game resets
+    if (lives == 0) {
+        let rows = parseInt(document.getElementById('rows').value);
+        let cols = parseInt(document.getElementById('cols').value);
+        restartGame(rows, cols);
+        gameOver = true;
     }
 
     // If the ball hits a block, the block is removed and the score increases
-    for (let block of blockGenerator.blocks) {
-        if (boxOverlap(box, block) && block.color != "black") {
-            block.color = "black"; // Mark the block as hit
-            box.velocity.y *= -1; // Change the ball's direction
-            score++; // Increase the score
+
+    let hitBlock = false; // Boolean to determine if the ball hits a block
+
+    blockGenerator.blocks = blockGenerator.blocks.filter(block => {
+        if (boxOverlap(box, block)) {
+            hitBlock = true;
+            score++;
+    
+            // Store the block's position before removing it
+            let blockPosition = new Vec(block.position.x, block.position.y);
+    
+            // Chance to spawn a Power-Up
+            if (Math.random() < 0.4) {
+                let powerUp = new PowerUp(blockPosition, 20, 20);
+                powerUp.type = powerUpTypes[Math.floor(Math.random() * powerUpTypes.length)]; // Random powerup
+                powerUps.push(powerUp);
+            }
+    
+            return false; // Remove the block
         }
+        return true; // Keep the block if not hit
+    });
+
+    // Draw and update powerups
+    for (let powerUp of powerUps) {
+        powerUp.draw(ctx);
+        powerUp.update(deltaTime);
+    }
+
+    // If the powerup hits the paddle, the powerup is removed
+
+    powerUps = powerUps.filter(powerUp => {
+        if (boxOverlap(powerUp, paddle)) {
+            switch (powerUp.type) {
+                case "paddle":
+                    paddle.width += 20;
+                    break;
+                case "ball":
+                    box.width += 10;
+                    box.height += 10;
+                    break;
+                case "life":
+                    lives++;
+                    break;
+            }
+            return false; // Remove the powerup
+        }
+        return true; // Keep the powerup if not hit
+    });
+
+    // Only change the direction of the ball if it hits a block
+    if (hitBlock) {
+        box.velocity.y *= -1;
+    }
+
+    // If there are no more blocks, the game is won
+    if (blockGenerator.blocks.length == 0) {
+        win = true;
+        box.reset();
     }
 
     oldTime = newTime;

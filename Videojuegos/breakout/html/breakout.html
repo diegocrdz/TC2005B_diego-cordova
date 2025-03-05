@@ -9,12 +9,30 @@
 
     <body>
         <div id="headerContainer">
-            <h1>B R E A K O U T</h1>
+            <h1>DEFINITIVE BREAKOUT</h1>
         </div>
-        <canvas id="canvas"></canvas>
+
+        <div id="gameContainer">
+            <div id="config">
+                <h2>Game Settings</h2>
+                <div>
+                    <label for="rows">Rows:</label>
+                    <input type="number" id="rows" min="5" max="10" value="5">
+                </div>
+                <div>
+                    <label for="cols">Columns:</label>
+                    <input type="number" id="cols" min="5" max="10" value="10">
+                </div>
+                <button id="startGame">Apply & Restart</button>
+            </div>
+    
+            <canvas id="canvas"></canvas>    
+        </div>
+        
         <a href="/">
             <button id="backButton">Back</button>
         </a>
+        
         <script> main(); </script>
     </body>
 </html>

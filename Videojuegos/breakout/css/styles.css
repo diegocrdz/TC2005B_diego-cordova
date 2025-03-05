@@ -87,3 +87,39 @@ canvas {
 #ui input, #ui select, #ui option, #ui canvas {
   pointer-events: auto;
 }
+
+#gameContainer {
+  display: flex;
+}
+
+#config {
+  display: flex;
+  flex-direction: column;
+  color: white;
+  border: 1px solid white;
+  padding: 20px;
+  margin-right: 20px;
+}
+
+#config h2 {
+  margin-top: 0;
+}
+
+#config div {
+  display: flex;
+  justify-content: space-between;
+}
+
+#config button {
+  margin-top: 20px;
+  padding: 10px;
+  background-color: black;
+  color: white;
+  border: 1px white solid;
+  cursor: pointer;
+}
+
+#config button:hover {
+  background-color: white;
+  color: black;
+}
