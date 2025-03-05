@@ -13,15 +13,15 @@ const canvasHeight = 600;
 
 // Time variables
 let oldTime;
-const paddleVelocity = 1;
+const paddleVelocity = 0.5;
 const speedIncrease = 1.05;
-const initalSpeed = 0.5;
+const initalSpeed = 0.3;
 
 // Game variables
 let lives = 3;
 let score = 0;
 let gameOver = false;
-let waitingForContinue = false;
+let waitingForContinue = true;
 let win = false;
 let powerUps = []; // Array to store the powerups
 let powerUpTypes = ["paddle", "ball", "life"];
@@ -39,7 +39,7 @@ class Ball extends GameObject {
         this.width = width;
         this.height = height;
         this.inPlay = false; // Boolean to determine if the ball is in play
-        this.initVelocity(); // Initialize the velocity of the ball
+        this.velocity = new Vec(0.0, 0.0); // Initialize the velocity of the ball
     }
 
     update(deltaTime) {
@@ -77,8 +77,8 @@ class Paddle extends GameObject {
         this.position = this.position.plus(this.velocity.times(deltaTime)); // d = v * t
 
         // Collision detection between the paddles and the canvas
-        if (this.position.y < 3 * (canvasHeight / 4)) {
-            this.position.y = 3 * (canvasHeight / 4);
+        if (this.position.y < canvasHeight / 2) {
+            this.position.y = canvasHeight / 2;
         }
         else if (this.position.y > canvasHeight - 20 - this.height) {
             this.position.y = canvasHeight - 20 - this.height;
@@ -162,7 +162,7 @@ class PowerUp extends GameObject {
 // Box
 const box = new Ball(new Vec(canvasWidth / 2, canvasHeight / 2), 15, 15, "white");
 // Paddles
-const paddle = new Paddle(new Vec(canvasWidth / 2 - 75, canvasHeight), 80, 15, "white");
+const paddle = new Paddle(new Vec(canvasWidth / 2 - 40, 5 * (canvasHeight / 6)), 80, 15, "white");
 // Bars
 const topBar = new GameObject(new Vec(0, 0), canvasWidth, 20, "gray", "obstacle");
 const bottomBar = new GameObject(new Vec(0, canvasHeight - 20), canvasWidth, 20, "gray", "obstacle");
@@ -212,30 +212,30 @@ function createEventListeners() {
 
         // Move the paddle
         if (event.key == 'a') { // Left
-            paddle.velocity = new Vec(- paddleVelocity, 0);
+            paddle.velocity.x = -paddleVelocity;
         }
         if (event.key == 'd') { // Right
-            paddle.velocity = new Vec(paddleVelocity, 0);
+            paddle.velocity.x = paddleVelocity;
         }
         if (event.key == 'w') { // Up
-            paddle.velocity = new Vec(0, - paddleVelocity);
+            paddle.velocity.y = -paddleVelocity;
         }
         if (event.key == 's') { // Down
-            paddle.velocity = new Vec(0, paddleVelocity);
+            paddle.velocity.y = paddleVelocity;
         } 
 
         // Start the game
-        if (event.key == ' ' && !box.inPlay) {
+        else if (event.key == ' ' && !box.inPlay) {
             box.initVelocity();
             waitingForContinue = false;
             gameOver = false;
         }
 
         // Restart the game
-        if (event.key == 'r') {
+        else if (event.key == 'r') {
             restartGame(rows, columns);
         }
-        if (event.key == ' ' && win) {
+        else if (event.key == ' ' && win) {
             restartGame(rows, columns);
             win = false;
             box.initVelocity();
