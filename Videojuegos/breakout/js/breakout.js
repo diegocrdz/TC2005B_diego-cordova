@@ -113,7 +113,7 @@ class BlockGenerator {
         let colors = ["red", "green", "blue", "yellow", "purple"]; // Array with the colors of the blocks
 
         const blockSpacing = 5; // Space between blocks
-        const blockWidth = (canvasWidth - 30) / columns; // Calculate block width
+        const blockWidth = (canvasWidth - leftBar.width - rightBar.width + blockSpacing) / columns; // Calculate block width
         const blockHeight = (canvasHeight / 4) / rows; // Calculate block height
         
         for (let i = 0; i < rows; i++) {
