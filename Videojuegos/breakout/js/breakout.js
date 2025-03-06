@@ -22,7 +22,6 @@ let lives = 3;
 let score = 0;
 let gameOver = false;
 let waitingForContinue = true;
-let win = false;
 let powerUps = []; // Array to store the powerups
 let powerUpTypes = ["paddle", "ball", "life"];
 
@@ -175,9 +174,8 @@ const scoreLabel = new TextLabel(20, 20, "20px Ubuntu Mono", "black");
 const blockGenerator = new BlockGenerator();
 blockGenerator.generateBlocks(5, 10);
 // Continue label
-const continueLabel = new TextLabel(canvasWidth / 2 - 120, 2 * canvasHeight / 3, "30px Ubuntu Mono", "white");
+const continueLabel = new TextLabel(canvasWidth / 2 - 100, 2 * canvasHeight / 3, "30px Ubuntu Mono", "white");
 const gameOverLabel = new TextLabel(canvasWidth / 2 - 60, 2 * canvasHeight / 3 - 40, "30px Ubuntu Mono", "white");
-const winLabel = new TextLabel(canvasWidth / 2 - 60, 2 * canvasHeight / 3 - 40, "30px Ubuntu Mono", "white");
 
 // Main function of the game
 
@@ -192,12 +190,8 @@ function main() {
 
     // Get the button to start the game in the page
     document.getElementById('startGame').addEventListener('click', () => {
-        // Get the values of the rows and columns from the input fields
-        let rows = parseInt(document.getElementById('rows').value);
-        let cols = parseInt(document.getElementById('cols').value);
-
-        // Restart the game with the new values
-        restartGame(rows, cols);
+        // Restart the game
+        restartGame();
     });
 
     createEventListeners();
@@ -233,11 +227,10 @@ function createEventListeners() {
 
         // Restart the game
         else if (event.key == 'r') {
-            restartGame(rows, columns);
+            restartGame();
         }
-        else if (event.key == ' ' && win) {
-            restartGame(rows, columns);
-            win = false;
+        else if (event.key == ' ') {
+            restartGame();
             box.initVelocity();
         }
     });
@@ -251,14 +244,21 @@ function createEventListeners() {
     });
 }
 
-function restartGame(rows, columns) {
+function restartGame() {
+    // Get the number of rows and columns from the input fields
+    let rows = parseInt(document.getElementById('rows').value);
+    let cols = parseInt(document.getElementById('cols').value);
+
+    // Reset the game variables
     gameOver = false;
-    waitingForContinue = false;
+    waitingForContinue = true;
+
+    // Reset the game elements
     score = 0;
     lives = 3;
     box.reset();
     blockGenerator.clearBlocks();
-    blockGenerator.generateBlocks(rows, columns);
+    blockGenerator.generateBlocks(rows, cols);
     powerUps = [];
     paddle.resetWidth();
 }
@@ -294,16 +294,11 @@ function drawScene(newTime) {
     // Draw game over label
     if (gameOver) {
         gameOverLabel.draw(ctx, "Game Over");
-        continueLabel.draw(ctx, "Press 'space' to continue");
+        continueLabel.draw(ctx, "Press 'space' to start");
     }
     // Draw continue label
     else if (waitingForContinue) {
-        continueLabel.draw(ctx, "Press 'space' to continue");
-    }
-    // Draw win label
-    else if (win) {
-        winLabel.draw(ctx, "You win!");
-        continueLabel.draw(ctx, "Press 'space' to restart");
+        continueLabel.draw(ctx, "Press 'space' to start");
     }
 
     // Update the properties of the objects
@@ -335,9 +330,7 @@ function drawScene(newTime) {
 
     // If the player has no more lives, the game resets
     if (lives == 0) {
-        let rows = parseInt(document.getElementById('rows').value);
-        let cols = parseInt(document.getElementById('cols').value);
-        restartGame(rows, cols);
+        restartGame();
         gameOver = true;
     }
 
@@ -399,8 +392,7 @@ function drawScene(newTime) {
 
     // If there are no more blocks, the game is won
     if (blockGenerator.blocks.length == 0) {
-        win = true;
-        box.reset();
+        restartGame();
     }
 
     oldTime = newTime;
