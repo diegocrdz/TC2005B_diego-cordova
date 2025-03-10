@@ -1,8 +1,8 @@
 /*
- * Implementation of the game
+ * Implementation of the game Breakout
  *
  * Diego Córdova Rodríguez
- * 2025-02-25
+ * 2025-03-12
  */
 
 "use strict";
@@ -45,6 +45,7 @@ class Ball extends GameObject {
         this.position = this.position.plus(this.velocity.times(deltaTime)); // d = v * t
     }
 
+    // Initialize the angle and velocity of the ball
     initVelocity() {
         this.inPlay = true;
         // Random angle between 135 and 45 degrees
@@ -52,6 +53,7 @@ class Ball extends GameObject {
         this.velocity = new Vec(Math.cos(angle), Math.sin(angle)).times(initalSpeed);
     }
 
+    // Reset the ball to the center of the canvas
     reset() {
         this.inPlay = false;
         this.position = new Vec(canvasWidth / 2, canvasHeight / 2);
@@ -63,39 +65,41 @@ class Ball extends GameObject {
 
 class Paddle extends GameObject {
 
-    constructor(position, width, height, color, velocity) { // constructor of the class
-        super(position, width, height, color, "paddle"); // super calls the constructor of the parent class
+    constructor(position, width, height, color, velocity) { // Constructor of the class
+        super(position, width, height, color, "paddle"); // Super calls the constructor of the parent class
         this.velocity = new Vec(0.0, 0.0);
     }
 
+    // Reset the width of the paddle
     resetWidth() {
         this.width = 80;
     }
 
     update(deltaTime) {
+        // Update the position of the paddle
         this.position = this.position.plus(this.velocity.times(deltaTime)); // d = v * t
 
         // Collision detection between the paddles and the canvas
-        if (this.position.y < canvasHeight / 2) {
+        if (this.position.y < canvasHeight / 2) { // Limit the paddle to the bottom half of the canvas
             this.position.y = canvasHeight / 2;
         }
-        else if (this.position.y > canvasHeight - 20 - this.height) {
+        else if (this.position.y > canvasHeight - bottomBar.height - this.height) { // Bottom bar
             this.position.y = canvasHeight - 20 - this.height;
         }
-        else if (this.position.x < 20) {
+        else if (this.position.x < leftBar.width) { // Left bar
             this.position.x = 20;
         }
-        else if (this.position.x > canvasWidth - 20 - this.width) {
+        else if (this.position.x > canvasWidth - rightBar.width - this.width) { // Right bar
             this.position.x = canvasWidth - 20 - this.width;
         }
     }
 }
 
-// Class for creating each block
+// Class for creating each block in the game
 class Block extends GameObject {
 
-    constructor(position, width, height, color) { // constructor of the class
-        super(position, width, height, color, "block"); // super calls the constructor of the parent class
+    constructor(position, width, height, color) { // Constructor of the class
+        super(position, width, height, color, "block"); // Super calls the constructor of the parent class
     }
 }
 
@@ -103,10 +107,10 @@ class Block extends GameObject {
 class BlockGenerator {
 
     constructor() {
-        this.blocks = []; // Array to store the blocks
+        this.blocks = []; // Array to store the blocks generated
     }
 
-    // Function to generate the blocks
+    // Function to generate the blocks in the game
     generateBlocks(rows, columns) {
 
         let colors = ["red", "green", "blue", "yellow", "purple"]; // Array with the colors of the blocks
@@ -115,18 +119,18 @@ class BlockGenerator {
         const blockWidth = (canvasWidth - leftBar.width - rightBar.width + blockSpacing) / columns; // Calculate block width
         const blockHeight = (canvasHeight / 4) / rows; // Calculate block height
         
-        for (let i = 0; i < rows; i++) {
+        for (let i = 0; i < rows; i++) { // For each row
 
-            // Select a random color for weach row
-            let random = Math.floor(Math.random() * colors.length); // Random color
+            // Select a random color for each row
+            let random = Math.floor(Math.random() * colors.length); // Random color from the array
             let color = colors[random]; // Assign the random color to the row of blocks
             colors.splice(random, 1); // Remove the color from the array so that it doesnt repeat
 
-            for (let j = 0; j < columns; j++) {
+            for (let j = 0; j < columns; j++) { // For each column
 
-                let block = new Block(new Vec(20 + j * blockWidth, 20 + i * blockHeight), blockWidth - blockSpacing, blockHeight - blockSpacing, color, "block");
+                let block = new Block(new Vec(leftBar.width + j * blockWidth, topBar.height + i * blockHeight), blockWidth - blockSpacing, blockHeight - blockSpacing, color, "block");
                 // To determine the position of each block:
-                // 1. The initial position is 20, 20, that's why we add 20 to the x and y coordinates
+                // 1. The initial position is 20, 20 because of the top and left bar
                 // 2. We multiply the block width by the column number to get the x coordinate
                 // 3. We multiply the block height by the row number to get the y coordinate
                 // Example:
@@ -156,9 +160,9 @@ class PowerUp extends GameObject {
     }
 }
 
-// Objects to represent elements of the game
+// Objects of the game
 
-// Box
+// Ball
 const box = new Ball(new Vec(canvasWidth / 2, canvasHeight / 2), 15, 15, "white");
 // Paddles
 const paddle = new Paddle(new Vec(canvasWidth / 2 - 40, 5 * (canvasHeight / 6)), 80, 15, "white");
@@ -167,15 +171,14 @@ const topBar = new GameObject(new Vec(0, 0), canvasWidth, 20, "gray", "obstacle"
 const bottomBar = new GameObject(new Vec(0, canvasHeight - 20), canvasWidth, 20, "gray", "obstacle");
 const leftBar = new GameObject(new Vec(0, 0), 20, canvasHeight, "gray", "obstacle");
 const rightBar = new GameObject(new Vec(canvasWidth - 20, 0), 20, canvasHeight, "gray", "obstacle");
-// Lifes label
+// Labels
 const livesLabel = new TextLabel(canvasWidth - 100, 20, "20px Ubuntu Mono", "black");
 const scoreLabel = new TextLabel(20, 20, "20px Ubuntu Mono", "black");
+const continueLabel = new TextLabel(canvasWidth / 2 - 100, 2 * canvasHeight / 3, "30px Ubuntu Mono", "white");
+const gameOverLabel = new TextLabel(canvasWidth / 2 - 60, 2 * canvasHeight / 3 - 40, "30px Ubuntu Mono", "white");
 // Blocks
 const blockGenerator = new BlockGenerator();
 blockGenerator.generateBlocks(5, 10);
-// Continue label
-const continueLabel = new TextLabel(canvasWidth / 2 - 100, 2 * canvasHeight / 3, "30px Ubuntu Mono", "white");
-const gameOverLabel = new TextLabel(canvasWidth / 2 - 60, 2 * canvasHeight / 3 - 40, "30px Ubuntu Mono", "white");
 
 // Main function of the game
 
@@ -194,11 +197,14 @@ function main() {
         restartGame();
     });
 
+    // Create the event listeners for detecting the key presses
     createEventListeners();
 
+    // Draw the scene
     drawScene(0);
 }
 
+// Create the event listeners for detecting the key presses
 function createEventListeners() {
 
     // When a key is pressed, the event is triggered
@@ -238,6 +244,7 @@ function createEventListeners() {
     // When a key is released, the event is triggered
     window.addEventListener('keyup', (event) => {
 
+        // Stop the paddle
         if (event.key == 'a' || event.key == 'd' || event.key == 'w' || event.key == 's') {
             paddle.velocity = new Vec(0, 0);
         }
