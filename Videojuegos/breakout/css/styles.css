@@ -92,7 +92,7 @@ canvas {
   display: flex;
 }
 
-#config {
+#side-menu {
   display: flex;
   flex-direction: column;
   color: white;
@@ -101,7 +101,17 @@ canvas {
   margin-right: 20px;
 }
 
-#config h2 {
+#config, #game-values {
+  display: flex;
+  flex-direction: column;
+  color: white;
+  background-color: #262626;
+  border: 1px solid white;
+  padding: 20px;
+  margin-bottom: 20px;
+}
+
+#config h2, #game-values h2 {
   margin-top: 0;
 }
 

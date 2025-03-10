@@ -172,8 +172,8 @@ const bottomBar = new GameObject(new Vec(0, canvasHeight - 20), canvasWidth, 20,
 const leftBar = new GameObject(new Vec(0, 0), 20, canvasHeight, "gray", "obstacle");
 const rightBar = new GameObject(new Vec(canvasWidth - 20, 0), 20, canvasHeight, "gray", "obstacle");
 // Labels
-const livesLabel = new TextLabel(canvasWidth - 100, 20, "20px Ubuntu Mono", "black");
-const scoreLabel = new TextLabel(20, 20, "20px Ubuntu Mono", "black");
+const livesLabel = new TextLabel(canvasWidth - 100, 18, "20px Ubuntu Mono", "black");
+const scoreLabel = new TextLabel(20, 18, "20px Ubuntu Mono", "black");
 const continueLabel = new TextLabel(canvasWidth / 2 - 100, 2 * canvasHeight / 3, "30px Ubuntu Mono", "white");
 const gameOverLabel = new TextLabel(canvasWidth / 2 - 60, 2 * canvasHeight / 3 - 40, "30px Ubuntu Mono", "white");
 // Blocks
@@ -245,8 +245,11 @@ function createEventListeners() {
     window.addEventListener('keyup', (event) => {
 
         // Stop the paddle
-        if (event.key == 'a' || event.key == 'd' || event.key == 'w' || event.key == 's') {
-            paddle.velocity = new Vec(0, 0);
+        if (event.key == 'a' || event.key == 'd') {
+            paddle.velocity.x = 0;
+        }
+        if (event.key == 'w' || event.key == 's') {
+            paddle.velocity.y = 0;
         }
     });
 }
@@ -307,6 +310,18 @@ function drawScene(newTime) {
     else if (waitingForContinue) {
         continueLabel.draw(ctx, "Press 'space' to start");
     }
+
+    // Show last powerup in the page
+    if (powerUps.length > 0) {
+        document.getElementById('last-powerup').innerHTML = "Power-Up: " + powerUps[powerUps.length - 1].type;
+    }
+    else {
+        document.getElementById('last-powerup').innerHTML = "Power-Up: None";
+    }
+    // Show the paddle width in the page
+    document.getElementById('paddle-size').innerHTML = "Paddle Size: " + paddle.width;
+    // Show the ball speed in the page
+    document.getElementById('ball-speed').innerHTML = "Ball Speed: " + Math.sqrt(box.velocity.x * box.velocity.x + box.velocity.y * box.velocity.y).toFixed(2);
 
     // Update the properties of the objects
     box.update(deltaTime);

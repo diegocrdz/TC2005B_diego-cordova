@@ -13,20 +13,38 @@
         </div>
 
         <div id="gameContainer">
-            <div id="config">
-                <h2>Game Settings</h2>
-                <div>
-                    <label for="rows">Rows:</label>
-                    <input type="number" id="rows" min="1" max="10" value="5">
+
+            <div id="side-menu">
+
+                <div id="config">
+                    <h2>Game Settings</h2>
+                    <div>
+                        <label for="rows">Rows:</label>
+                        <input type="number" id="rows" min="1" max="10" value="5">
+                    </div>
+                    <div>
+                        <label for="cols">Columns:</label>
+                        <input type="number" id="cols" min="1" max="10" value="10">
+                    </div>
+                    <button id="startGame">Apply & Restart</button>
                 </div>
-                <div>
-                    <label for="cols">Columns:</label>
-                    <input type="number" id="cols" min="1" max="10" value="10">
+    
+                <div id="game-values">
+                    <h2>Game Values</h2>
+                    <div>
+                        <span id="last-powerup">None</span>
+                    </div>
+                    <div>
+                        <span id="paddle-size">Paddle Size: 1</span>
+                    </div>
+                    <div>
+                        <span id="ball-speed">Ball Speed: 1</span>
+                    </div>
                 </div>
-                <button id="startGame">Apply & Restart</button>
             </div>
     
-            <canvas id="canvas"></canvas>    
+            <canvas id="canvas"></canvas>  
+
         </div>
         
         <a href="/">
