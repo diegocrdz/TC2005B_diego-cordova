@@ -22,8 +22,9 @@ let lives = 3;
 let score = 0;
 let gameOver = false;
 let waitingForContinue = true;
+let win = false;
 let powerUps = []; // Array to store the powerups
-let powerUpTypes = ["paddle", "ball", "life"];
+let powerUpTypes = ["paddle", "ball", "life"]; // Types of powerups
 
 // Context of the Canvas
 let ctx;
@@ -177,6 +178,7 @@ const livesLabel = new TextLabel(canvasWidth - 100, 18, "20px Ubuntu Mono", "whi
 const scoreLabel = new TextLabel(20, 18, "20px Ubuntu Mono", "white");
 const continueLabel = new TextLabel(canvasWidth / 2 - 100, 2 * canvasHeight / 3, "30px Ubuntu Mono", "white");
 const gameOverLabel = new TextLabel(canvasWidth / 2 - 60, 2 * canvasHeight / 3 - 40, "30px Ubuntu Mono", "white");
+const winLabel = new TextLabel(canvasWidth / 2 - 50, 2 * canvasHeight / 3 - 40, "30px Ubuntu Mono", "white");
 // Blocks
 const blockGenerator = new BlockGenerator();
 blockGenerator.generateBlocks(5, 10);
@@ -225,19 +227,16 @@ function createEventListeners() {
             paddle.velocity.y = paddleVelocity;
         } 
 
-        // Start the game
+        // Start the game when the 'space' key is pressed
         else if (event.key == ' ' && !box.inPlay) {
             box.initVelocity();
             waitingForContinue = false;
             gameOver = false;
+            win = false;
         }
 
         // Restart the game when the 'r' key is pressed
         if (event.key == 'r') {
-            restartGame();
-        }
-        // If the game is over, restart the game when the space key is pressed
-        if (event.key == ' ' && gameOver) {
             restartGame();
         }
     });
@@ -265,6 +264,7 @@ function restartGame() {
 
     // Reset the game variables
     gameOver = false;
+    win = false;
     waitingForContinue = true;
 
     // Reset the game elements
@@ -308,11 +308,13 @@ function drawScene(newTime) {
     // Draw game over label
     if (gameOver) {
         gameOverLabel.draw(ctx, "Game Over");
-        continueLabel.draw(ctx, "Press 'space' to start");
     }
     // Draw continue label
-    else if (waitingForContinue) {
+    if (waitingForContinue) {
         continueLabel.draw(ctx, "Press 'space' to start");
+    }
+    if (win) {
+        winLabel.draw(ctx, "You Win!");
     }
 
     // Show last powerup in the page
@@ -382,13 +384,13 @@ function drawScene(newTime) {
                 // Assign a color to the powerup based on its type
                 switch (powerUp.type) {
                     case "paddle":
-                        powerUp.color = "lightblue";
+                        powerUp.color = "#A0C4FF"; // Light blue
                         break;
                     case "ball":
-                        powerUp.color = "lightyellow";
+                        powerUp.color = "#FDFFB6"; // Light yellow
                         break;
                     case "life":
-                        powerUp.color = "lightgreen";
+                        powerUp.color = "#CAFFBF"; // Light green
                         break;
                 }
 
@@ -437,6 +439,7 @@ function drawScene(newTime) {
     // If there are no more blocks, the game is won
     if (blockGenerator.blocks.length == 0) {
         restartGame();
+        win = true;
     }
 
     oldTime = newTime;

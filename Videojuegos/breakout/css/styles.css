@@ -19,6 +19,11 @@ body {
     align-items: center;
     justify-items: center;
     background-image: url("../img/bkg.png"); /* Background image */
+    background-size: cover; /* Cover the entire screen */
+}
+
+body p {
+  color: white;
 }
 
 #headerContainer{
