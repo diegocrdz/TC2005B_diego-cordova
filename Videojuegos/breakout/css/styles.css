@@ -18,6 +18,7 @@ body {
     justify-content: center;
     align-items: center;
     justify-items: center;
+    background-image: url("../img/bkg.png"); /* Background image */
 }
 
 #headerContainer{
@@ -30,9 +31,10 @@ body {
   flex-direction: row;
   justify-content: center;
   align-items: center;
+  border-bottom: 1px solid white; /* Border for the header */
 }
 
-h1{
+h1 {
   margin: 0px;
   color: white;
 }
@@ -44,6 +46,7 @@ canvas {
     background-color: #87ceeb;
     /* width: 600px; */
     /* height: 600px; */
+    border: 1px solid white; /* Border for the game canvas */
 }
 
 #canvas {
@@ -92,6 +95,7 @@ canvas {
   display: flex;
 }
 
+/* Sidebar Menu for the game settings, values and instructions */
 #side-menu {
   display: flex;
   flex-direction: column;
@@ -99,22 +103,42 @@ canvas {
   border: 1px solid white;
   padding: 20px;
   margin-right: 20px;
+  gap: 20px;
 }
 
+/* Configurations for each section of the sidebar menu */
 #config, #game-values {
-  display: flex;
-  flex-direction: column;
+  display: flex; /* Flexbox for the sidebar menu */
+  flex-direction: column; /* Display the elements in a column */
   color: white;
   background-color: #262626;
   border: 1px solid white;
-  padding: 20px;
-  margin-bottom: 20px;
+  padding: 15px;
 }
-
 #config h2, #game-values h2 {
   margin-top: 0;
+  margin-bottom: 15px;
 }
 
+#instructions {
+  font-size: 10px;
+}
+
+#config input {
+  background-color: black;
+  color: white;
+  border: 1px white solid;
+  padding: 2px;
+  margin-bottom: 10px;
+  text-align: center;
+}
+#config input:hover { /* When the cursor hovers over the input fields */
+  outline: none; /* Remove the default outline of the field */
+  background-color: white;
+  color: black;
+}
+
+/* Show each input field separated from the text */
 #config div {
   display: flex;
   justify-content: space-between;
@@ -126,10 +150,13 @@ canvas {
   background-color: black;
   color: white;
   border: 1px white solid;
-  cursor: pointer;
+  cursor: pointer; /* Change the cursor to a pointer when hovering over the button */
 }
-
-#config button:hover {
+#config button:hover { /* When the cursor hovers over the button */
   background-color: white;
   color: black;
+}
+
+#game-values p {
+  margin: 5px 0; /* Margin up-down, left-right */
 }

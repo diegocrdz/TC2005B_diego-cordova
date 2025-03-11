@@ -15,7 +15,7 @@ const canvasHeight = 600;
 let oldTime;
 const paddleVelocity = 0.5;
 const speedIncrease = 1.05;
-const initalSpeed = 0.3;
+let initalSpeed = 0.3;
 
 // Game variables
 let lives = 3;
@@ -113,7 +113,8 @@ class BlockGenerator {
     // Function to generate the blocks in the game
     generateBlocks(rows, columns) {
 
-        let colors = ["red", "green", "blue", "yellow", "purple"]; // Array with the colors of the blocks
+        let colors = ["#ffadad", "#ffd6a5", "#fdffb6", "#caffbf", "#9bf6ff", "#a0c4ff", "#bdb2ff", "#ffc6ff", "#fffffc"]; // Array with the colors of the blocks
+        // Colors obtained from https://coolors.co/palette/ffadad-ffd6a5-fdffb6-caffbf-9bf6ff-a0c4ff-bdb2ff-ffc6ff-fffffc
 
         const blockSpacing = 5; // Space between blocks
         const blockWidth = (canvasWidth - leftBar.width - rightBar.width + blockSpacing) / columns; // Calculate block width
@@ -167,13 +168,13 @@ const box = new Ball(new Vec(canvasWidth / 2, canvasHeight / 2), 15, 15, "white"
 // Paddles
 const paddle = new Paddle(new Vec(canvasWidth / 2 - 40, 5 * (canvasHeight / 6)), 80, 15, "white");
 // Bars
-const topBar = new GameObject(new Vec(0, 0), canvasWidth, 20, "gray", "obstacle");
-const bottomBar = new GameObject(new Vec(0, canvasHeight - 20), canvasWidth, 20, "gray", "obstacle");
-const leftBar = new GameObject(new Vec(0, 0), 20, canvasHeight, "gray", "obstacle");
-const rightBar = new GameObject(new Vec(canvasWidth - 20, 0), 20, canvasHeight, "gray", "obstacle");
+const topBar = new GameObject(new Vec(0, 0), canvasWidth, 20, "black", "obstacle");
+const bottomBar = new GameObject(new Vec(0, canvasHeight - 20), canvasWidth, 20, "black", "obstacle");
+const leftBar = new GameObject(new Vec(0, 0), 20, canvasHeight, "black", "obstacle");
+const rightBar = new GameObject(new Vec(canvasWidth - 20, 0), 20, canvasHeight, "black", "obstacle");
 // Labels
-const livesLabel = new TextLabel(canvasWidth - 100, 18, "20px Ubuntu Mono", "black");
-const scoreLabel = new TextLabel(20, 18, "20px Ubuntu Mono", "black");
+const livesLabel = new TextLabel(canvasWidth - 100, 18, "20px Ubuntu Mono", "white");
+const scoreLabel = new TextLabel(20, 18, "20px Ubuntu Mono", "white");
 const continueLabel = new TextLabel(canvasWidth / 2 - 100, 2 * canvasHeight / 3, "30px Ubuntu Mono", "white");
 const gameOverLabel = new TextLabel(canvasWidth / 2 - 60, 2 * canvasHeight / 3 - 40, "30px Ubuntu Mono", "white");
 // Blocks
@@ -231,13 +232,13 @@ function createEventListeners() {
             gameOver = false;
         }
 
-        // Restart the game
-        else if (event.key == 'r') {
+        // Restart the game when the 'r' key is pressed
+        if (event.key == 'r') {
             restartGame();
         }
-        else if (event.key == ' ') {
+        // If the game is over, restart the game when the space key is pressed
+        if (event.key == ' ' && gameOver) {
             restartGame();
-            box.initVelocity();
         }
     });
 
@@ -258,6 +259,9 @@ function restartGame() {
     // Get the number of rows and columns from the input fields
     let rows = parseInt(document.getElementById('rows').value);
     let cols = parseInt(document.getElementById('cols').value);
+
+    // Get the initial speed of the ball from the input field
+    initalSpeed = parseFloat(document.getElementById('initial-speed').value);
 
     // Reset the game variables
     gameOver = false;
@@ -322,6 +326,8 @@ function drawScene(newTime) {
     document.getElementById('paddle-size').innerHTML = "Paddle Size: " + paddle.width;
     // Show the ball speed in the page
     document.getElementById('ball-speed').innerHTML = "Ball Speed: " + Math.sqrt(box.velocity.x * box.velocity.x + box.velocity.y * box.velocity.y).toFixed(2);
+    // Show the ball size in the page
+    document.getElementById('ball-size').innerHTML = "Ball Size: " + box.width;
 
     // Update the properties of the objects
     box.update(deltaTime);
@@ -370,8 +376,23 @@ function drawScene(newTime) {
     
             // Chance to spawn a Power-Up
             if (Math.random() < 0.4) {
-                let powerUp = new PowerUp(blockPosition, 20, 20);
-                powerUp.type = powerUpTypes[Math.floor(Math.random() * powerUpTypes.length)]; // Random powerup
+                let powerUp = new PowerUp(blockPosition, 20, 20); // Create a powerup
+                powerUp.type = powerUpTypes[Math.floor(Math.random() * powerUpTypes.length)]; // Random powerup type
+
+                // Assign a color to the powerup based on its type
+                switch (powerUp.type) {
+                    case "paddle":
+                        powerUp.color = "lightblue";
+                        break;
+                    case "ball":
+                        powerUp.color = "lightyellow";
+                        break;
+                    case "life":
+                        powerUp.color = "lightgreen";
+                        break;
+                }
+
+                // Add the powerup to the array
                 powerUps.push(powerUp);
             }
     
@@ -387,9 +408,10 @@ function drawScene(newTime) {
     }
 
     // If the powerup hits the paddle, the powerup is removed
+    powerUps = powerUps.filter(powerUp => { // Filter the powerups, removing the ones that hit the paddle
+        if (boxOverlap(powerUp, paddle)) { // If the powerup hits the paddle
 
-    powerUps = powerUps.filter(powerUp => {
-        if (boxOverlap(powerUp, paddle)) {
+            // Apply the powerup based on its type
             switch (powerUp.type) {
                 case "paddle":
                     paddle.width += 20;
