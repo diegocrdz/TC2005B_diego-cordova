@@ -1,8 +1,8 @@
 /*
- * Collection of classes that will be used in the games
+ * Collection of classes that will be used in the breakout game
  *
  * Diego Córdova Rodríguez
- * 2025-02-25
+ * 2025-03-12
  */
 
 class Vec {
@@ -28,6 +28,7 @@ class Vec {
     }
 }
 
+// Class for creating a game object
 class GameObject {
     constructor(position, width, height, color, type) {
         this.position = position;
