@@ -53,6 +53,8 @@ header h1 {
     height: 100%; /* 100% del contenedor padre */
     box-sizing: border-box; /* Incluye el relleno en el cálculo del ancho y alto del grid */
     gap: 10px; /* Espacio entre objetos arriba-abao, izquierda-derecha */
+    padding: 10px; /* Relleno de los subcontenedores */
+    border: #5b5858 2px solid; /* Borde para visualizar cada grid de forma separada */
 }
 
 /* Grid 1 */
@@ -157,6 +159,7 @@ header h1 {
     background-color: #00a27f; /* Verde oscuro */
     padding: 10px;
     gap: 6px 10px; /* Espacio entre objetos arriba-abao, izquierda-derecha */
+    border: none; /* Elimina borde de los subcontenedores */
 }
 #grid-item-4-4 {
     grid-row: 1;
