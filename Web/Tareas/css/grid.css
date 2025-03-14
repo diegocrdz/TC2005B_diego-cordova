@@ -1,0 +1,35 @@
+body {
+    background-color: gray;
+    height: 100vh;
+}
+
+.grid-item {
+    background-color: cyan;
+    padding: 10px;
+    border: 3px solid white;
+}
+
+.grid-container {
+    
+    height: 100%;
+
+    display: grid;
+
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: 1fr 2fr 1fr 1fr 1fr;
+
+    gap: 5px;
+
+    grid-template-areas:
+        "header header .";
+}
+
+#grid-item-1 {
+    grid-area: header;
+}
+
+#grid-item-2 {
+    /* grid-row: 2 / 5; /* Abarca desde la fila 2 a la 5 */
+    grid-row: 2 / span 3; /* Abarca 3 espacios desde la fila 2 */
+    grid-column: 2;
+}
