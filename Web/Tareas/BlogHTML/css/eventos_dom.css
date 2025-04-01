@@ -1,3 +1,4 @@
+/*
 .container{
     padding: 10px;
     border-bottom: 1px solid black;
@@ -5,4 +6,280 @@
 
 table, td{
     border: 1px solid black;
+}
+*/
+
+/* Estilos generales */
+html {
+    font-family: 'Roboto', Arial, sans-serif;
+    font-size: 16px;
+    background: linear-gradient(135deg, #1b1b1b, #2c3e50);
+    color: #ffffff;
+    scroll-behavior: smooth;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+}
+
+/* Header */
+header {
+    background-color: #334453;
+    color: white;
+    display: flex;
+    flex-direction: column; /* Alinea los elementos en columna */
+    align-items: center; /* Alinea los elementos verticalmente */
+}
+
+header h1 {
+    background-color: #1f262c;
+    width: 100%;
+    margin: 0; /* Elimina el margen del título */
+    font: 20px sans-serif; /* Fuente y tamaño del título */
+    padding: 20px 0; /* Relleno de 20px arriba y abajo */
+    text-align: center;
+    font-style: italic;
+    font-weight: bold;
+}
+
+header nav {
+    flex-direction: row;
+    padding: 10px 0; /* Relleno arriba-abajo */
+}
+
+header nav a {
+    color: white;
+    text-decoration: none; /* Elimina el subrayado */
+    font-weight: bold;
+    padding: 10px; /* Relleno arriba-abajo, izquierda-derecha */
+}
+
+header nav a:hover {
+    background-color: #2f3c4a; /* Cambia el color al pasar el mouse */
+}
+
+/* Contenedor principal */
+.container {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+    padding: 20px;
+    margin: 20px auto;
+    max-width: 80%;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.container:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.7);
+}
+
+/* Estilo minimalista para los elementos <li> de las preguntas */
+.container ol li {
+    background: #44515e;
+    color: #e1f1ff;
+    padding: 10px;
+    margin-bottom: 40px;
+    border-radius: 5px;
+    border-left: 4px solid #779ec0;
+    list-style: none; /* Elimina el estilo de viñetas predeterminado */
+    font-size: 1em;
+}
+
+/* Estilo para los números de las preguntas */
+.container ol {
+    counter-reset: li; /* Resetea el contador */
+}
+
+.container ol li::before {
+    content: counter(li) ". ";
+    counter-increment: li; /* Incrementa el contador */
+    color: #779ec0;
+    font-weight: bold;
+    margin-right: 8px;
+}
+
+/* Títulos */
+h1, h2, h3, h4 {
+    color: #e1f1ff;
+    text-align: center;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-bottom: 20px;
+}
+
+h1 {
+    font-size: 2.5em;
+    background: linear-gradient(90deg, #779ec0, #e1f1ff);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+h2 {
+    font-size: 2em;
+    border-bottom: 2px solid #779ec0;
+    display: inline-block;
+    padding-bottom: 5px;
+}
+
+/* Listas */
+ol, ul {
+    padding-left: 20px;
+}
+
+li {
+    margin-bottom: 10px;
+    line-height: 1.6;
+}
+
+/* Enlaces */
+a {
+    color: #779ec0;
+    text-decoration: none;
+    font-weight: bold;
+    transition: color 0.3s ease;
+}
+
+a:hover {
+    color: #e1f1ff;
+}
+
+/* Tablas */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+}
+
+table th, table td {
+    border: 1px solid #a6a6a6;
+    padding: 10px;
+    text-align: center;
+    color: #ffffff;
+}
+
+table th {
+    background: #1f262c;
+    font-weight: bold;
+}
+
+table td {
+    background: rgba(255, 255, 255, 0.05);
+}
+
+table tr:hover {
+    background: rgba(255, 255, 255, 0.2);
+}
+
+/* Formularios */
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin: 20px 0;
+}
+
+input[type="text"], input[type="button"], select {
+    padding: 10px;
+    border: 2px solid #66798a;
+    border-radius: 5px;
+    background: #1f262c;
+    color: #ffffff;
+    font-size: 1em;
+    transition: all 0.3s ease;
+}
+
+input[type="text"]:focus, input[type="button"]:hover, select:hover {
+    border-color: #779ec0;
+    background: #334453;
+    outline: none;
+}
+
+input[type="button"] {
+    cursor: pointer;
+    font-weight: bold;
+}
+
+/* Imágenes */
+img {
+    max-width: 100%;
+    height: auto;
+    border: 3px solid #66798a;
+    border-radius: 10px;
+    transition: transform 0.3s ease, border-color 0.3s ease;
+}
+
+img:hover {
+    transform: scale(1.05);
+    border-color: #e1f1ff;
+}
+
+/* Animaciones */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.container {
+    animation: fadeIn 0.5s ease-in-out;
+}
+
+/* Footer */
+footer {
+    background: #334453;
+    color: white;
+    text-align: center;
+    padding: 20px 0;
+    margin-top: 40px;
+    border-top: 4px solid #1f262c;
+}
+
+footer p {
+    margin: 0;
+    font-size: 0.9em;
+}
+
+footer a {
+    color: #779ec0;
+    text-decoration: none;
+}
+
+footer a:hover {
+    color: #e1f1ff;
+}
+
+/* Botones especiales */
+#btn-add-color, #btn-rmv-color, #btn-insert-r, #btn-insert-c, #btn-change {
+    background: linear-gradient(90deg, #779ec0, #334453);
+    color: white;
+    border: none;
+    font-size: 1em;
+    padding: 10px 20px;
+    border-radius: 5px;
+    transition: background 0.3s ease, transform 0.3s ease;
+}
+
+#btn-add-color:hover, #btn-rmv-color:hover, #btn-insert-r:hover, #btn-insert-c:hover, #btn-change:hover {
+    background: linear-gradient(90deg, #334453, #779ec0);
+    transform: translateY(-3px);
+}
+
+/* Respuesta del mouse */
+#mousePosition {
+    font-size: 1.2em;
+    font-weight: bold;
+    color: #e1f1ff;
+    text-align: center;
+    margin-top: 20px;
 }
