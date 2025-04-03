@@ -1,285 +1,189 @@
 /*
-.container{
-    padding: 10px;
-    border-bottom: 1px solid black;
-}
+ * Archivo de estilos complementarios para Actividad en clase: Eventos y DOM y ChatGPT
+ *
+ * Diego Córdova Rodríguez, A01781166
+ *
+ * Se le pidió a ChatGPT que generara un CSS para complementar el blog_css.css
+ * Se usó el siguiente prompt:
+ * Basado en el css de mi proyecto, genera uno nuevo que no sobrescriba lo que ya tiene, solo que complemente la nueva página
+ * y explote tus capacidades de programación y estilos, de acuerdo a los colores que uso en mi blog y el estilo que ya existe
+ * 
+ * También se le pidió que generara comentarios explicativos para las secciones de código que pudieran ser confusas
+ * y que no se entendieran a simple vista.
+ */
 
-table, td{
-    border: 1px solid black;
-}
-*/
-
-/* Estilos generales */
-html {
-    font-family: 'Roboto', Arial, sans-serif;
-    font-size: 16px;
-    background: linear-gradient(135deg, #1b1b1b, #2c3e50);
-    color: #ffffff;
-    scroll-behavior: smooth;
-}
-
-body {
-    margin: 0;
-    padding: 0;
-}
-
-/* Header */
-header {
-    background-color: #334453;
-    color: white;
-    display: flex;
-    flex-direction: column; /* Alinea los elementos en columna */
-    align-items: center; /* Alinea los elementos verticalmente */
-}
-
-header h1 {
-    background-color: #1f262c;
+/* Fondo animado con líneas en movimiento (simula un efecto sutil tipo "pantalla tech")
+   Se usa ::before para generar un efecto visual encima del fondo base sin afectar el contenido */
+   body::before {
+    content: ""; /* Elemento vacío generado antes del body */
+    position: fixed; /* Se fija en la pantalla para que no se mueva con el scroll */
+    top: 0;
+    left: 0;
     width: 100%;
-    margin: 0; /* Elimina el margen del título */
-    font: 20px sans-serif; /* Fuente y tamaño del título */
-    padding: 20px 0; /* Relleno de 20px arriba y abajo */
-    text-align: center;
-    font-style: italic;
-    font-weight: bold;
+    height: 100%;
+    background: repeating-linear-gradient(
+        to bottom,
+        rgba(120, 160, 200, 0.03) 0px,
+        rgba(120, 160, 200, 0.03) 2px,
+        transparent 2px,
+        transparent 40px
+    ); /* Crea líneas finas horizontales y espacio entre ellas */
+    animation: moveLines 5s linear infinite; /* Mueve las líneas verticalmente en loop */
+    z-index: -1; /* Asegura que el fondo esté detrás del contenido */
 }
 
-header nav {
-    flex-direction: row;
-    padding: 10px 0; /* Relleno arriba-abajo */
+/* Define la animación del fondo animado. Cambia la posición del fondo gradualmente */
+@keyframes moveLines {
+    0% { background-position-y: 0; }
+    100% { background-position-y: 40px; } /* Simula que las líneas bajan */
 }
 
-header nav a {
-    color: white;
-    text-decoration: none; /* Elimina el subrayado */
-    font-weight: bold;
-    padding: 10px; /* Relleno arriba-abajo, izquierda-derecha */
+/* Fondo degradado principal de la página */
+body {
+    background: linear-gradient(180deg, #1b1b1b 0%, #202833 30%, #1b1b1b 100%);
+    position: relative;
+    z-index: 0;
 }
 
-header nav a:hover {
-    background-color: #2f3c4a; /* Cambia el color al pasar el mouse */
-}
-
-/* Contenedor principal */
+/* Estilo para contenedores principales de contenido */
 .container {
-    background: rgba(255, 255, 255, 0.1);
-    border-radius: 10px;
-    padding: 20px;
-    margin: 20px auto;
-    max-width: 80%;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    background: linear-gradient(135deg, #242c36, #1a1f26); /* Gradiente de fondo más dinámico */
+    border-radius: 10px; /* Bordes redondeados */
+    box-shadow: 0 4px 12px rgba(0,0,0,0.4); /* Sombra externa para resaltar el bloque */
+    padding: 20px; /* Espaciado interior */
+    margin: 30px auto; /* Espaciado exterior centrado */
+    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Transiciones suaves */
+    width: 90%;
+    max-width: 1000px;
+    border: 1px solid #3c4c5c; /* Borde sutil */
 }
 
 .container:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.7);
+    transform: translateY(-5px); /* Eleva el contenedor al pasar el mouse */
+    box-shadow: 0 6px 16px rgba(0,0,0,0.5);
+    background: linear-gradient(135deg, #2b3642, #1e2229);
 }
 
-/* Estilo minimalista para los elementos <li> de las preguntas */
-.container ol li {
-    background: #44515e;
-    color: #e1f1ff;
-    padding: 10px;
-    margin-bottom: 40px;
-    border-radius: 5px;
-    border-left: 4px solid #779ec0;
-    list-style: none; /* Elimina el estilo de viñetas predeterminado */
-    font-size: 1em;
-}
-
-/* Estilo para los números de las preguntas */
-.container ol {
-    counter-reset: li; /* Resetea el contador */
-}
-
-.container ol li::before {
-    content: counter(li) ". ";
-    counter-increment: li; /* Incrementa el contador */
-    color: #779ec0;
-    font-weight: bold;
-    margin-right: 8px;
-}
-
-/* Títulos */
-h1, h2, h3, h4 {
-    color: #e1f1ff;
-    text-align: center;
-    text-transform: uppercase;
-    letter-spacing: 2px;
-    margin-bottom: 20px;
-}
-
-h1 {
-    font-size: 2.5em;
-    background: linear-gradient(90deg, #779ec0, #e1f1ff);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-}
-
-h2 {
-    font-size: 2em;
-    border-bottom: 2px solid #779ec0;
-    display: inline-block;
+.container h2, .container h3, .container h4 {
+    color: #94d0ff; /* Azul claro para títulos */
+    border-bottom: 2px solid #88c0ff; /* Línea decorativa inferior */
     padding-bottom: 5px;
+    text-shadow: 1px 1px 2px #000000; /* Mejora legibilidad sobre fondos oscuros */
 }
 
-/* Listas */
-ol, ul {
+.container p, .container li {
+    line-height: 1.6; /* Mejora la lectura del texto */
+    color: #d6e2f0;
+}
+
+.container ol {
+    margin-left: 20px;
     padding-left: 20px;
 }
 
-li {
-    margin-bottom: 10px;
-    line-height: 1.6;
-}
-
-/* Enlaces */
-a {
-    color: #779ec0;
-    text-decoration: none;
+/* Botones con efecto hover suave y estilo coherente con la paleta */
+input[type="button"], button {
+    background-color: #3c566e; /* Fondo base del botón */
+    color: white;
+    border: 1px solid #88c0ff;
+    padding: 10px 15px;
+    border-radius: 5px;
+    cursor: pointer; /* Convierte el cursor en una mano */
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    margin: 5px 0;
     font-weight: bold;
-    transition: color 0.3s ease;
 }
 
-a:hover {
-    color: #e1f1ff;
+input[type="button"]:hover, button:hover {
+    background-color: #4c6b8c; /* Cambia el color al pasar el mouse */
+    transform: scale(1.03); /* Hace zoom leve */
 }
 
-/* Tablas */
+/* Inputs de texto que combinan con el fondo oscuro */
+input[type="text"] {
+    padding: 8px;
+    border-radius: 5px;
+    border: 1px solid #88c0ff;
+    background-color: #1b1b1b;
+    color: white;
+    margin: 5px 0;
+}
+
+form {
+    display: flex;
+    flex-direction: column; /* Ordena los elementos del formulario en columna */
+    gap: 10px; /* Espaciado entre campos */
+}
+
+/* Tablas con diseño moderno y legible */
 table {
-    width: 100%;
-    border-collapse: collapse;
-    margin: 20px 0;
-    background: rgba(255, 255, 255, 0.1);
-    border-radius: 10px;
+    background: linear-gradient(145deg, #2d333b, #1e2229);
+    border: none;
+    border-radius: 8px;
     overflow: hidden;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+    width: 100%;
+    color: #e0f7ff;
+    margin-top: 15px;
+    border-spacing: 0;
 }
 
 table th, table td {
-    border: 1px solid #a6a6a6;
-    padding: 10px;
-    text-align: center;
-    color: #ffffff;
+    padding: 12px 15px; /* Espaciado interno de celdas */
+    text-align: left;
 }
 
 table th {
-    background: #1f262c;
+    background-color: #334453;
+    color: #ffffff;
     font-weight: bold;
+    text-transform: uppercase;
+    border-bottom: 2px solid #88c0ff; /* Línea divisoria en el encabezado */
 }
 
-table td {
-    background: rgba(255, 255, 255, 0.05);
+table tr:nth-child(even) {
+    background-color: rgba(255, 255, 255, 0.03); /* Rayado alternado */
 }
 
 table tr:hover {
-    background: rgba(255, 255, 255, 0.2);
+    background-color: rgba(136, 192, 255, 0.08); /* Resalta fila al pasar el mouse */
+    transition: background-color 0.2s ease;
 }
 
-/* Formularios */
-form {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    margin: 20px 0;
-}
-
-input[type="text"], input[type="button"], select {
-    padding: 10px;
-    border: 2px solid #66798a;
-    border-radius: 5px;
-    background: #1f262c;
-    color: #ffffff;
-    font-size: 1em;
-    transition: all 0.3s ease;
-}
-
-input[type="text"]:focus, input[type="button"]:hover, select:hover {
-    border-color: #779ec0;
-    background: #334453;
-    outline: none;
-}
-
-input[type="button"] {
-    cursor: pointer;
-    font-weight: bold;
-}
-
-/* Imágenes */
-img {
-    max-width: 100%;
-    height: auto;
-    border: 3px solid #66798a;
-    border-radius: 10px;
-    transition: transform 0.3s ease, border-color 0.3s ease;
-}
-
-img:hover {
-    transform: scale(1.05);
-    border-color: #e1f1ff;
-}
-
-/* Animaciones */
-@keyframes fadeIn {
-    from {
-        opacity: 0;
-        transform: translateY(20px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-.container {
-    animation: fadeIn 0.5s ease-in-out;
-}
-
-/* Footer */
-footer {
-    background: #334453;
+/* Select con bordes suaves y alto contraste */
+select {
+    background-color: #1b1b1b;
     color: white;
-    text-align: center;
-    padding: 20px 0;
-    margin-top: 40px;
-    border-top: 4px solid #1f262c;
-}
-
-footer p {
-    margin: 0;
-    font-size: 0.9em;
-}
-
-footer a {
-    color: #779ec0;
-    text-decoration: none;
-}
-
-footer a:hover {
-    color: #e1f1ff;
-}
-
-/* Botones especiales */
-#btn-add-color, #btn-rmv-color, #btn-insert-r, #btn-insert-c, #btn-change {
-    background: linear-gradient(90deg, #779ec0, #334453);
-    color: white;
-    border: none;
-    font-size: 1em;
-    padding: 10px 20px;
+    border: 1px solid #779ec0;
+    padding: 8px;
     border-radius: 5px;
-    transition: background 0.3s ease, transform 0.3s ease;
 }
 
-#btn-add-color:hover, #btn-rmv-color:hover, #btn-insert-r:hover, #btn-insert-c:hover, #btn-change:hover {
-    background: linear-gradient(90deg, #334453, #779ec0);
-    transform: translateY(-3px);
+/* Imagen interactiva para el ejercicio del gato */
+#imagenGato {
+    transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.4); /* Da un leve relieve */
 }
 
-/* Respuesta del mouse */
+#imagenGato:hover {
+    transform: scale(1.05); /* Aumenta el tamaño ligeramente */
+    border-color: #88c0ff;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.5);
+}
+
+/* Indicador de posición del mouse. El texto parpadea con animación pulseText */
 #mousePosition {
-    font-size: 1.2em;
     font-weight: bold;
-    color: #e1f1ff;
-    text-align: center;
-    margin-top: 20px;
+    color: #00ff99; /* Verde brillante */
+    margin-top: 10px;
+    font-size: 1.1em;
+    animation: pulseText 1.5s infinite ease-in-out; /* Aplica la animación definida abajo */
+    text-shadow: 0 0 5px #00ff99; /* Efecto de brillo */
+}
+
+/* Animación que hace que el texto "palpite" cambiando su opacidad suavemente */
+@keyframes pulseText {
+    0% { opacity: 1; } /* Totalmente visible */
+    50% { opacity: 0.6; } /* Se hace más tenue */
+    100% { opacity: 1; } /* Regresa a opacidad completa */
 }

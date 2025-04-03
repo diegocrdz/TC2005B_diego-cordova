@@ -2,13 +2,14 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <link rel="stylesheet" href="../css/blog_css.css">
     <link type="text/css" rel="stylesheet" href="../css/eventos_dom.css">
     <script type="module" src="../js/eventos_dom.js"></script>
     <title>Eventos y Dom</title>
-    <link rel="stylesheet" href="../css/eventos_dom.css">
 </head>
 
 <body>
+    <!-- Header. Se agregó para respetar el estilo del blog -->
     <header>
         <h1>Blog de Diego Córdova Rodríguez</h1>
         <nav>
@@ -20,8 +21,11 @@
         </nav>
     </header>
 
-    <h1>Eventos y DOM y ChatGPT</h1>
-
+    <!-- Título. Se agregó para respetar el estilo del blog -->
+    <section class="titulo", id="titulo-dom">
+        <h1>Eventos y DOM y ChatGPT</h1>
+    </section>
+    
     <div class="container">
         <h2>Instrucciones</h2>
         <p>Utiliza ChatGPT y github Copilot para resolver la siguiente actividad. Antes de hacer los ejercicios, contesta las siguientes preguntas. Pregúntale a ChatGPT las preguntas, y verifica que lo que haya generado es correcto. Cuando sea necesario, agrega un ejemplo de código. Incluye una fuente que valide o invalide lo que generó. Agrega elementos de HTML con tus respuestas. (<b>Protip</b>: usa ChatGPT para que las respuestas las ponga directamente en elementos de html.)</p>
@@ -38,8 +42,8 @@
                 <p><strong>Respuesta Copilot:</strong> El DOM (Document Object Model) es una interfaz de programación que permite a los lenguajes de programación acceder y manipular la estructura, estilo y contenido de un documento HTML o XML. El DOM representa el documento como una jerarquía de nodos, donde cada nodo corresponde a una parte del documento.</p>
                 <p><strong>¿Es correcto?</strong>
                     De acuerdo a la documentación de MDN, ambas definiciones son acertadas pero algo ambiguas.
-                    Ambas IA's tratan de dar un concepto general del DOM, pero no lo explican a detalles. Esto es
-                    probablemente porque no se les pidió un ejemplo o una explicación más detallada. A pesar de esto,
+                    Ambas IAs tratan de dar un concepto general del DOM, pero no lo explican a detalles. Esto probablemente
+                    se debe a que no se les pidió un ejemplo o una explicación más detallada. A pesar de esto,
                     la respuesta de ChatGPT parece ser más clara, lo que permite que sea más fácil de comprender, 
                     mientras que la de Copilot es más técnica.
                 </p>
@@ -53,7 +57,7 @@
                 <p><strong>¿Es correcto?</strong>
                     Las respuestas son muy similares y acertadas. De acuerdo a la documentación de MDN, un nodo
                     es un punto único en un árbol del DOM. En este caso, la documentación no ofrece una definición
-                    tan clara como la del DOM, lo que hace que las respuestas de las IA's sean más acertadas para
+                    tan clara como la del DOM, lo que hace que las respuestas de las IAs sean más acertadas para
                     personas que no están familiarizadas con el concepto. En este caso, ambas respuestas fueron
                     claras y concisas.
                 </p>
@@ -69,7 +73,7 @@
                     del DOM, mencionando algunos ejemplos comunes. Comparando las respuestas con la documentación
                     de MDN, esta última ofrece una explicación detallada y con una lista más completa de todos
                     los métodos que se pueden usar para acceder a los elementos del DOM. En este caso, la respuesta
-                    de las IA's a forma de resumen es correcta.
+                    de las IAs a forma de resumen es correcta.
                 </p>
                 <p><strong>Fuente:</strong> <a href="https://developer.mozilla.org/es/docs/Web/API/Document_Object_Model/Introduction#%C2%BFc%C3%B3mo_se_accede_al_dom">¿Cómo se accede al DOM?</a></p>
             </li>
@@ -79,9 +83,9 @@
                 <p><strong>Respuesta ChatGPT:</strong> Para modificar un elemento del DOM, primero se accede a él mediante alguno de los métodos mencionados anteriormente y luego se alteran sus propiedades o contenido, como element.innerHTML para cambiar el contenido interno, element.style para modificar estilos CSS o element.setAttribute para editar atributos.</p>
                 <p><strong>Respuesta Copilot:</strong> Para modificar un elemento del DOM, primero se selecciona utilizando métodos como <code>document.getElementById</code> o <code>document.querySelector</code>. Luego, se pueden cambiar sus propiedades como <code>innerHTML</code> para el contenido, <code>style</code> para los estilos, o <code>setAttribute</code> para los atributos. También se pueden agregar o eliminar clases con <code>classList.add</code> y <code>classList.remove</code>.</p>
                 <p><strong>¿Es correcto?</strong>
-                    Amabs respuestas son correctas, pero carecen de ejemplos y una explicación más clara.
+                    Ambas respuestas son correctas, pero carecen de ejemplos y una explicación más clara.
                     La respuesta de Copilot es más completa ya que menciona la posibilidad de agregar o quitar
-                    clases. En este caso, la documentación sigue ofreciedo una explicación más completa y detallada
+                    clases. En este caso, la documentación sigue ofreciendo una explicación más completa y detallada
                     para modificar elementos.
                 </p>
                 <p><strong>Fuente:</strong> <a href="https://developer.mozilla.org/es/docs/Web/API/Element/setAttribute">Element.setAttribute</a></p>
@@ -94,7 +98,7 @@
                 <p><strong>¿Es correcto?</strong>
                     Ambas respuestas son correctas, aunque algo técnicas y poco amigables para alguien que no 
                     está familiarizado con los conceptos. A pesar de esto, no se menciona cuándo se debe usar
-                    cada uno de los métodos, lo que si es explicado de mejor forma en fuentes como Built In.
+                    cada uno de los métodos, lo que sí es explicado de mejor forma en fuentes como Built In.
                 </p>
                 <p><strong>Fuente:</strong> <a href="https://builtin.com/articles/queryselector-vs-getelementbyid">QuerySelector() frente a GetElementById() en JavaScript</a></p>
             </li>
@@ -146,15 +150,17 @@
                 <p><strong>¿Es correcto?</strong>
                     Ambas respuestas son correctas y ofrecen una explicación general de lo que es un objeto de evento.
                     Nuevamente, no ofrecen ejemplos de cómo se utilizan y su relación con el DOM. En este caso, la 
-                    documentación de MDN ofrece una explicación más completa, aunque no tan clara como la de las IA's.
+                    documentación de MDN ofrece una explicación más completa, aunque no tan clara como la de las IAs.
                 </p>
                 <p><strong>Fuente:</strong> <a href="https://developer.mozilla.org/es/docs/Web/API/Event">Evento</a></p>
             </li>
         </ol>
     </div>
 
-    <h3>Ejercicios de código</h3>
-    <p>Usa ChatGPT y copilot para resolver los ejercicios. Por cada ejercicio, pídele a ChatGPT o a copilot que te genere los comentarios. Verifica los resultados antes de subirlos a tu repo.</p>
+    <div class="container">
+        <h3>Ejercicios de código</h3>
+        <p>Usa ChatGPT y copilot para resolver los ejercicios. Por cada ejercicio, pídele a ChatGPT o a copilot que te genere los comentarios. Verifica los resultados antes de subirlos a tu repo.</p>
+    </div>
 
     <div class="container">
         <p>1. Modifica el siguiente elemento para mostrar la posición del mouse en el documento:</p>
@@ -229,7 +235,9 @@
 
     <div class="container">
         <p>6. Al poner el mouse encima de la siguiente imagen, genera dos números aleatorios entre 300 y 600 para el width y height de una imagen. Reemplaza la imagen de placeholder por otra similar con el tamaño random que generaste. El evento solo se dispara cuando el mouse entra en la imagen.</p>
-        <img id="imagenGato" src="http://placekitten.com/200/300" alt="Gato lindo">
+        <!-- <img id="imagenGato" src="http://placekitten.com/200/300" alt="Gato lindo"> -->
+        <!-- Se modificó la url a placecats.com ya que placekitten.com mostraba un error HTTP ERROR 521 -->
+        <img id="imagenGato" src="http://placecats.com/200/300" alt="Gato lindo">
     </div>
 
     <div class="container">
@@ -237,13 +245,13 @@
 
         <h4>Experiencia general</h4>
         <p>
-            Esta actividad me pareció interesante ya que pude ver las diferencias entre el uso de diferentes IA's
+            Esta actividad me pareció interesante ya que pude ver las diferencias entre el uso de diferentes IAs
             en un contexto de investigación y programación. De acuerdo a lo que pude observar, ChatGPT y Copilot 
             son herramientas que si bien no ofrecen explicaciones tan detalladas, te pueden dar una introducción 
-            general a los temas para uno pueda empezar a investigar.
+            general a los temas para que uno pueda empezar a investigar.
         </p>
         <p>
-            También tuve un par de complicaciones al utilizar ambas IA's. Por un lado, tuve que especificarle a 
+            También tuve un par de complicaciones al utilizar ambas IAs. Por un lado, tuve que especificarle a 
             ChatGPT que necesitaba su respuesta a forma de párrafo para esta actividad, pero en lugar de darme 
             únicamente el texto, me daba todo en formato HTML, lo que no era lo que le estaba especificando. 
             Tuve que hacer múltiples conversaciones para que finalmente me diera una respuesta que me sirviera. 
@@ -257,8 +265,8 @@
         </p>
         <p>
             El contenido como tal de las respuestas fue bueno y bastante similar a lo que se encontraba en páginas 
-            oficiales de documentación. A pesar de que las respuestas no contuvieran ejemplos claros, estos se les
-            puede pedir a ambas IA's, siendo ChatGPT la que ofrece ejemplos más claros y concisos.
+            oficiales de documentación. A pesar de que las respuestas no contuvieran ejemplos claros, esto se pueden
+            pedir a ambas IAs, siendo ChatGPT la que ofrece ejemplos más claros y concisos.
         </p>
         <p>
             Otro de los aspectos que puedo mencionar que me parecieron interesantes es que, al momento de pedirle
@@ -268,20 +276,24 @@
             más difícil de comprender. En este aspecto, considero que Copilot no fue una herramienta útil. Al final 
             terminé utilizando ChatGPT para que me generara un código CSS que demostrara sus capacidades y estuviera
             basado en el CSS de mi blog. Así, la capacidad de tener un mejor contexto de ChatGPT me ayudó a obtener 
-            un CSS que, aunque su diseño no sea igual al del resto de mib blog, se parece más.
+            un CSS que, aunque su diseño no sea igual al del resto de mi blog, si es más similar.
         </p>
         <p>
             En cuanto a los ejercicios de programación, utilicé Copilot. Este si me ayudó a generar el código, de 
             acuerdo a lo que se le pedía. Sin embargo, tuve que aclarar la forma en la que quería los comentarios, 
-            ya que estos eran muy intrusivos en el código, en lugar de ser notas que me ayudaran a comprenderlo.
+            ya que estos eran muy invasivos en el código, en lugar de ser notas que me ayudaran a comprenderlo.
             Esto me hizo confirmar que Copilot es una herramienta desarrollada para programadores, en lugar de ser 
-            de propósito general como ChatGPT.
+            de propósito general como ChatGPT. Cabe mencionar que cambié la liga del ejercicio 6, ya que
+            <a href="http://placekitten.com/200/300">http://placekitten.com/200/300</a> no estaba funcionando.
+            En su lugar, utilicé <a href="http://placecats.com/200/300">http://placecats.com/200/300</a> que es un sitio
+            similar que utiliza imágenes de gatos como placeholders.
         </p>
         <h4>¿Cuándo y para qué usarías ChatGPT y cuándo Copilot?</h4>
         <p>
             De acuerdo a lo que pude observar, ChatGPT es mejor al momento de interpretar las instrucciones dadas, 
-            siendo más flexible con lo que se le pide. Esto puede llegar a ser un problema, ya que en ocasiones puede 
-            llegar a ser poco preciso y hacer algo diferente a lo que se le pidió. De la misma forma, las respuestas 
+            siendo más flexible con lo que se le pide, siendo sorprendentemente bueno para aspectos de programación 
+            a pesar de estar diseñado para propósitos generales. Esto último también puede llegar a provocar que sea 
+            poco preciso y hacer algo diferente a lo que se le pidió. De la misma forma, las respuestas 
             de ChatGPT fueron -en general- más claras y tenían más ejemplos que las de Copilot. En este sentido, pude 
             notar que Copilot ofrece respuestas más técnicas y orientadas a la programación, lo que tiene sentido 
             ya que ha sido diseñada para eso, mientras que ChatGPT fue diseñada para propósito general.
@@ -300,23 +312,23 @@
         </p>
         <h4>Ventajas de usar AI para programar</h4>
         <p>
-            Personalmente, opino que usar IA's para programar es un arma de doble filo, pero que si puede llegar
-            a ser muy útil si se usa correctamente, como una herramienta y no como el programador. Algunas de las
-            ventajas que he encontrado al momento de usar IA's son las siguientes:
+            Personalmente, opino que usar IAs para programar es un arma de doble filo, pero que sí puede llegar
+            a ser muy útil si se usa correctamente, como una herramienta y no como sustitución del programador.
+            Algunas de las ventajas que he encontrado al momento de usar IAs son las siguientes:
         </p>
         <ul>
             <li>Encontrar errores en códigos</li>
             <li>Comprender bloques de código complejos</li>
-            <li>Automatizar tareas tediosas de programar (como copiar y pegar etiquetas html)</li>
+            <li>Automatizar tareas tediosas de programar (como copiar y pegar etiquetas HTML)</li>
             <li>Generar ejemplos de código</li>
             <li>Mejorar la comprensión del código</li>
             <li>Sugerir correcciones para el código</li>
             <li>Ayuda a detectar errores de seguridad. Ej: Si usas una API KEY en tu código fuente, te advierte</li>
-            <li>Te puede ayudar a traducir bloques de código a otros idiomas</li>
+            <li>Te puede ayudar a traducir bloques de código a otros idiomas.</li>
         </ul>
         <h4>Desventajas de usar AI para programar</h4>
         <p>
-            Considero que las IA's aún cuentan con muchas desventajas. Algunas de estas son las siguientes:
+            Considero que las IAs aún cuentan con muchas desventajas. Algunas de estas son las siguientes:
         </p>
         <ul>
             <li>
@@ -332,13 +344,13 @@
                 ejecución para solucionar los errores.
             </li>
             <li>
-                La IA no puede ver la ejecución del código en tiempo real, por lo que no permite
-                solucionar errores de forma creativa. Muchas veces se necesita de pensar fuera de lo
-                que hay en el código para solucionar problemas.
+                Ligado al punto anterior, la IA no puede ver la ejecución del código en tiempo real, por
+                lo que no permite solucionar errores de forma creativa. Muchas veces se necesita de pensar
+                fuera de lo que hay en el código para solucionar problemas.
             </li>
             <li>La IA puede generar diferentes bloques de código que no son consistentes los unos con los otros</li>
             <li>
-                Puede llegar a obstaculizar el aprendizaje. Esto ocurre sobre todo con el autocompletado,
+                Puede llegar a obstaculizar el aprendizaje, lo que ocurre sobre todo con el autocompletado de Copilot,
                 ya que no permite que pienses por tu cuenta, sino que te ofrece directamente soluciones sin 
                 antes verificar que sean adecuadas para el proyecto.
             </li>
@@ -347,9 +359,17 @@
                 como se espera.
             </li>
             <li>
-                Las IA's se confunden al momento de trabajar en proyectos con muchos archivos, siendo incapaces
+                Las IAs se confunden al momento de trabajar en proyectos con muchos archivos, siendo incapaces
                 de ayudarte a identificar errores o solucionar problemas básicos.
             </li>
         </ul>
+    </div>
+
+    <!-- Final de la página. Se agregó para respetar el estilo del blog -->
+    <footer>
+        <a href="">Regresar al Inicio</a>
+        <p>TC2005B Copyright &copy 2025 - Diego Córdova Rodríguez</p>
+    </footer>
+
 </body>
 </html>

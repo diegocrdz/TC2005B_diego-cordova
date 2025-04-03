@@ -1,4 +1,11 @@
-// Ejercicios de código de eventos DOM
+/*
+ * Ejercicios de código de Eventos y DOM
+ *
+ * Diego Córdova Rodríguez, A01781166
+ *
+ * Estos ejercicios fuerion resueltos con ayuda de las IAs ChatGPT y Copilot
+ * como parte de la tarea Actividad en clase: Eventos y DOM y ChatGPT
+ */
 
 // 1. Modifica el siguiente elemento para mostrar la posición del mouse en el documento
 // <p id="mousePosition">Posición del mouse: </p>
@@ -136,5 +143,7 @@ document.getElementById('imagenGato').addEventListener('mouseenter', () => {
     console.log(`Nuevo tamaño: ${randomWidth}x${randomHeight}`);
 
     // Cambia el src de la imagen con los nuevos valores de ancho y alto
-    document.getElementById('imagenGato').src = `http://placekitten.com/${randomWidth}/${randomHeight}`;
+    // Se reemplazó la liga de placeholder de http://placekitten.com por http://placecats.com
+    // ya que placekitten.com muestra un error HTTP ERROR 521
+    document.getElementById('imagenGato').src = `http://placecats.com/${randomWidth}/${randomHeight}`;
 });

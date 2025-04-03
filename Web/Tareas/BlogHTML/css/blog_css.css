@@ -149,6 +149,9 @@ header nav a:hover {
 #titulo-css {
     background-image: url("https://assets.digitalocean.com/labs/images/community_bg.png");
 }
+#titulo-dom {
+    background-image: url("https://revista.lamardeonuba.es/wp-content/uploads/2023/07/ia.gif");
+}
 
 #bienvenida {
     /* Fondo degradado */
