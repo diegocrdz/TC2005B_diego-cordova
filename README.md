@@ -29,3 +29,4 @@ Repositorio personal para la materia TC2005B - Construcción de software y toma 
         - [Blog HTML](https://diegocrdz.github.io/TC2005B_diego-cordova/Web/Tareas/BlogHTML/html/inicio.html)
         - [Página web simple](https://diegocrdz.github.io/TC2005B_diego-cordova/Web/Tareas/html/simple.html)
         - [Grid CSS](https://diegocrdz.github.io/TC2005B_diego-cordova/Web/Tareas/Grid/html/grid.html)
+        - [Eventos, DOM y ChatGPT](https://diegocrdz.github.io/TC2005B_diego-cordova/Web/Tareas/BlogHTML/html/DomIndex.html)
